@@ -2,11 +2,25 @@
 
 {% block main_content %}
 
-<h1>Manage Staffs</h1>
-      {% url 'add_staff' as add_staff %}
-  <a href="{{ add_staff }}" class="btn btn-outline-info">Add Staff</a>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3>Manage Staffs</h3>
+    {% url 'add_staff' as add_staff %}
+    <a href="{{ add_staff }}" class="btn btn-outline-primary">Add staff</a>
+</div>
 
- <table class="table table-hover">
+<form method="get">
+    <div class="d-flex">
+         <div class="form-group align-items-start flex-column mx-3">
+          <label for="id_staff_id">Search by staff email</label>
+            <input type="text" class="form-control" name="staff_id" id="id_staff_id">
+        </div>
+        <div style="padding-top:30px;">
+            <button type="submit" class="btn btn-outline-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+ <table class="table">
       {% if messages %}
         {% for message in messages %}
           {% if message.tags == 'error' %}
@@ -23,8 +37,7 @@
       {% endif %}
     <thead>
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
+        <th>Staff</th>
         <th>Username</th>
         <th>Email</th>
         <th>Gender</th>
@@ -33,26 +46,46 @@
         <th>Action</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="text-dark">
      {% for staff in staffs %}
       <tr>
-        <td>{{ staff.staff.first_name }}</td>
-        <td>{{ staff.staff.last_name }}</td>
+        <td>{{ staff.staff.last_name }} {{ staff.staff.first_name }}</td>
         <td>{{ staff.staff.username }}</td>
         <td>{{ staff.staff.email }}</td>
         <td>{{ staff.gender }}</td>
         <td>{{ staff.address }}</td>
         <td><img src="{{ staff.display_image }}" width="100" ></td>
-        <td><a href="{% url 'edit_staff' staff_id=staff.staff.id %}" class="btn btn-outline-info">Edit</a>
-            <a href="{% url 'delete_staff' staff_id=staff.staff.id %}" class="btn btn-outline-danger">Delete</a>
+        <td>
+            <a href="{% url 'edit_staff' staff_id=staff.staff.id %}">
+              {% include 'admin_template/icons/edit_icon.html'%}
+            </a>
+            <a href="{% url 'delete_staff' staff_id=staff.staff.id %}">
+              {% include 'admin_template/icons/delete_icon.html'%}
+            </a>
         </td>
       </tr>
 
      {% endfor %}    </tbody>
   </table>
 
-
-
-
+<div class="d-flex justify-content-center">
+{% if staffs.has_previous %}
+        <a href="{% url 'manage_staff' %}?page=1" class="btn btn-outline-primary">First</a>
+        <a href="{% url 'manage_staff' %}?page={{ staffs.previous_page_number }}" class="btn btn-outline-primary">Previous Page</a>
+{% endif %}
+{% if staffs.paginator.page_range|length > 1%}
+{% for num in staffs.paginator.page_range %}
+    {% if staffs.number == num %}
+         <a href="{% url 'manage_staff' %}?page={{ num }}" class="btn btn-primary">{{ num }}</a>
+    {% elif num > staffs.number|add:'-3' and num < staffs.number|add:'3' %}
+        <a href="{% url 'manage_staff' %}?page={{num}}" class="btn btn-outline-primary">{{num}}</a>
+    {% endif %}
+{% endfor %}
+  {% endif %}
+{% if staffs.has_next %}
+         <a href="{% url 'manage_staff' %}?page={{ staffs.next_page_number }}" class="btn btn-outline-primary">Next Page</a>
+         <a href="{% url 'manage_staff' %}?page={{ staffs.paginator.num_pages }}" class="btn btn-outline-primary">Last</a>
+{% endif %}
+</div>
 
 {% endblock %}

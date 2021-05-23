@@ -3,62 +3,65 @@
 
 {% block main_content %}
 
-<h1>My Students</h1>
-
- <table class="table table-hover">
-     {% if messages %}
-        {% for message in messages %}
-      {% if message.tags == 'success' %}
-      <div class="form-group alert alert-success alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-         <strong>{{ message }}</strong></div>
-         {% endif %}
-
-        {% endfor %}
-
-
-      {% endif %}
-    <thead>
-      <tr>
-        <th>Name</th>
-          <th>SDU ID</th>
-        <th>Email</th>
-        <th width="15%">Grade</th>
-      </tr>
-    </thead>
-    <tbody>
-
-     {% for reg in reg %}
-
-      <tr>
-        <td>{{ reg.student_id }}</td>
-          <td>{{ reg.student_id.student.username }}</td>
-        <td>{{ reg.student_id.student.email }}</td>
-         <form action="/supervisor_grade" method="post" enctype="multipart/form-data">
-                 {% csrf_token %}
-          <td>
-              <input type="hidden" class="form-control"  name="reg_id" value="{{ reg.student_id.id }}">
-
-              {% for grades_list in grades_list %}
-                    {% if reg.student_id == grades_list.student_id %}
-              <input type="number"  class="form-control" name="sup_grade" value="{{ grades_list.supervisor_marks }}" max="100" min="0">
-              {% endif %}
-                 {%endfor%}
-
-          </td>
-                   {% endfor %}
-             {% if studentList %}
-        <div class="form-group">
-    <button type="submit" class="btn btn-outline-info">Set Grade</button>
-       </div>
+<!-- <h1>My Students</h1> -->
+<div class="my_student_page">
+  <div class="p-2 my_student_page_inner">
+      <h3 class="page_title">My Students</h3>
+      <table class="table table-hover">
+         {% if messages %}
+            {% for message in messages %}
+          {% if message.tags == 'success' %}
+          <div class="form-group alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+             <strong>{{ message }}</strong></div>
              {% endif %}
-           </form>
-      </tr>
+
+            {% endfor %}
+
+
+          {% endif %}
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>SDU ID</th>
+            <th>Email</th>
+            <th width="15%">Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        {% for reg in reg %}
+
+        <tr>
+          <td>{{ reg.student_id }}</td>
+          <td>{{ reg.student_id.student.username }}</td>
+          <td>{{ reg.student_id.student.email }}</td>
+          <form action="/supervisor_grade" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <td>
+                <input type="hidden" class="form-control"  name="reg_id" value="{{ reg.student_id.id }}" required>
+
+                {% for grades_list in grades_list %}
+                  {% if reg.student_id == grades_list.student_id %}
+                  <input type="number"  class="form-control" name="sup_grade" value="{{ grades_list.supervisor_marks }}" max="100" min="0" required>
+                  {% endif %}
+                {%endfor%}
+            </td>
+        {% endfor %}
+            {% if studentList %}
+            <div class="form-group">
+              <button type="submit" class="btn btn-outline-primary save_grade">Save Grade</button>
+            </div>
+            {% endif %}
+          </form>
+        </tr>
 
 
 
-    </tbody>
-  </table>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 
 

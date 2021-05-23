@@ -1,0 +1,111 @@
+{% extends 'admin_template/base.html' %}
+
+{% block main_content %}
+
+<h3>{{ post.title }}</h3>
+<a href="{% url 'manage_post' %}" class="btn btn-outline-primary" style="position: absolute;right: 22px;top: 55px;">Back</a>
+
+     {% if messages %}
+        {% for message in messages %}
+      {% if message.tags == 'success' %}
+      <div class="form-group alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+       {% if message.tags == 'error' %}
+      <div class="form-group alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+        {% endfor %}
+      {% endif %}
+
+
+    <div class="view_post" style="margin-top: 30px;">
+        <div class="view_post_inner">
+                    <div class="p-2">
+                        <div class="d-flex flex-row user-info">
+                            <img class="rounded-circle" src="{{ author.display_image }}" width="40">
+                            <div class="poster_info">
+                                <span class="d-block font-weight-bold name">{{author.admin}}</span>
+                                <span class="date text-black-50">Shared at {{ post.created_at|date:"H:iA, M d, Y" }}</span>
+                            </div>
+                        </div>
+                        <div class="mt-2 text_div">
+                            <p class="comment-text"><strong>{{ post.title }}</strong><br><br>  {{ post.body }}</p>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <a type="button" class="show_comment_btn" data-toggle="collapse" data-target="#demo{{ forloop.counter }}">
+                            Comments
+
+                            <span class="comments_count">
+                            {{ commentCount }}
+                            {% if commentCount == 1 %}
+                                comment 
+                            {% else %} 
+                                comment(s)
+                            {% endif %}
+                        </span>
+                        </a>
+                        
+                        
+                        
+                        <div class="comment_line">
+                        </div>
+                    </div>
+                    <div id="demo{{ forloop.counter }}" class="comment_demo collapse">
+                      {% for comment in comments %}
+                     <div class="p-2">
+                        <div class="d-flex flex-row user-info">
+                            {% if comment.author ==  author.admin %}
+                                <img class="rounded-circle comment_image" src="{{ comment.author.admin.display_image }}" width="40">
+                            {% else %}
+                            <img class="rounded-circle comment_image" src="{{ comment.author.students.display_image }}" width="40">
+                            {% endif %}
+                            <div class="d-flex flex-column justify-content-start ml-2">
+                                <span class="d-block font-weight-bold name">{{ comment.author }}</span>
+                                <span class="date text-black-50">{{ comment.created_at|date:"M d, H:iA, Y" }}</span>
+                            </div>
+                            <div class="ml-auto delete_student_comment">
+                                <a href="{% url 'delete_comment' comment_id=comment.id post_id=id %}">
+                                    Delete comment
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <p class="comment-text">{{ comment.body }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="bg-white">
+                        <div class="d-flex flex-row fs-12">
+                            <div class="like p-2 cursor"><span class="ml-1">No comments yet...</span></div>
+                        </div>
+                    </div>
+                  {% endfor %}
+                  </div>
+
+
+                <div class="p-2 student_comment">
+                    <form action="/admin_comment" method="post" enctype="multipart/form-data">
+                         {% csrf_token %}
+                    <div class="d-flex flex-row align-items-start">
+                        <img class="rounded-circle comment_image" src="{{ author.display_image }}" width="40">
+                         <input type="hidden" class="form-control"  name="post_id" value="{{ id }}">
+                        <textarea style="padding: 10px 45px 4px 10px;" placeholder="Add comment..." class="form-control ml-1 shadow-none textarea" name="comment" required></textarea>
+                        <button class="comment_btn" type="submit"><i class="fa fa-paper-plane"></i></button>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <!-- <button class="btn btn-primary btn-sm shadow-none" type="submit">Post comment</button> -->
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+{% endblock %}

@@ -2,11 +2,13 @@
 
 {% block main_content %}
 
-<h1>Manage Reports</h1>
-{% url 'add_report' as add_report %}
- <a href="{{ add_report }}" class="btn btn-outline-info">Add Report</a>
+<div class="d-flex align-items-center justify-content-between mb-4">
+    <h3>Manage Reports</h3>
+    {% url 'add_report' as add_report %}
+     <a href="{{ add_report }}" class="btn btn-outline-primary">Add report</a>
+</div>
 
- <table class="table table-hover">
+ <table class="table">
      {% if messages %}
         {% for message in messages %}
       {% if message.tags == 'success' %}
@@ -25,10 +27,10 @@
       {% endif %}
     <thead>
       <tr>
-        <th>Report Name</th>
-        <th width="40%">Report Details</th>
+        <th  style="min-width: 120px;">Report Name</th>
+        <th>Report Details</th>
         <th>Due Date</th>
-        <th>Action</th>
+        <th style="min-width: 120px;">Action</th>
         <th>Submission Status</th>
       </tr>
     </thead>
@@ -36,12 +38,16 @@
      {% for report in reports %}
       <tr>
         <td>{{ report.report_name }}</td>
-        <td><textarea class="form-control" rows="5" name="report_detail" disabled>{{ report.report_detail }}</textarea></td>
+        <td>{{ report.report_detail }}</td>
         <td>{{ report.due_date|date:"M d, H:iA, Y" }}</td>
-        <td><a href="{% url 'edit_report' report_id=report.id %}" class="btn btn-outline-info">Edit</a>
-           <a href="{% url 'delete_report' report_id=report.id %}" class="btn btn-outline-danger">Delete</a>
+        <td><a href="{% url 'edit_report' report_id=report.id %}">
+            {% include 'admin_template/icons/edit_icon.html'%}
+        </a>
+           <a href="{% url 'delete_report' report_id=report.id %}">
+               {% include 'admin_template/icons/delete_icon.html'%}
+           </a>
         </td>
-          <td><a href="{% url 'view_report' report_id=report.id %}" class="btn btn-outline-success">Check</a></td>
+          <td><a href="{% url 'view_report' report_id=report.id %}" class="btn btn-sm btn-outline-primary">Check</a></td>
       </tr>
      {% endfor %}
     </tbody>

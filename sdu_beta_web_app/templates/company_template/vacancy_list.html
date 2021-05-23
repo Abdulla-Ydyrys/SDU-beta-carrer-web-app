@@ -1,0 +1,63 @@
+{% extends 'company_template/base.html' %}
+
+{% block main_content %}
+
+<div class="teacher_vacancy_list_page">
+    <div class="p-2 teacher_vacancy_list_inner">
+        <h3 class="page_title">Vacancies</h3>
+             {% if messages %}
+        {% for message in messages %}
+      {% if message.tags == 'success' %}
+      <div class="form-group alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+       {% if message.tags == 'error' %}
+      <div class="form-group alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+        {% endfor %}
+
+
+      {% endif %}
+{% url 'add_company_vacancy' as add_company_vacancy %}
+<div class="form-group" style="float: right;">
+ <a href="{{ add_company_vacancy }}" class="btn btn-outline-primary">Add Vacancy</a>
+</div>
+
+ <table class="table table-hover" style="margin-top: 30px;">
+
+    <thead>
+      <tr>
+        <th style="min-width: 120px;">Vacancy name</th>
+        <th>Requirements</th>
+        <th>Amount</th>
+          <th style="min-width: 120px;">Action</th>
+          <th>Respondents</th>
+      </tr>
+    </thead>
+    <tbody>
+     {% for vacancy in vacancies %}
+      <tr>
+        <td>{{ vacancy.vacancy_name }}</td>
+            <td>{{ vacancy.requirements }}</td>
+          <td>{{ vacancy.amount }}</td>
+          <td>
+            <a href="{% url 'edit_company_vacancy' vacancy_id=vacancy.id %}">
+              {% include 'admin_template/icons/edit_icon.html'%}
+            </a>
+           <a href="{% url 'delete_company_vacancy' vacancy_id=vacancy.id %}">
+             {% include 'admin_template/icons/delete_icon.html'%}
+           </a>
+        </td>
+                <td><a href="{% url 'view_respondent' vacancy_id=vacancy.id %}" class="btn btn-outline-primary">View</a></td>
+        </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+</div>
+
+{% endblock %}

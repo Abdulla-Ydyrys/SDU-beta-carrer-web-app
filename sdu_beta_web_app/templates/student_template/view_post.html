@@ -1,0 +1,113 @@
+{% extends 'student_template/base.html' %}
+
+{% block main_content %}
+
+<!-- <h1>Posts</h1> -->
+
+     {% if messages %}
+        {% for message in messages %}
+      {% if message.tags == 'success' %}
+      <div class="form-group alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+       {% if message.tags == 'error' %}
+      <div class="form-group alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+        {% endfor %}
+      {% endif %}
+
+
+    <div class="view_post">
+        <div class="view_post_inner">
+                <h3 class="p-2 page_title">News Feed</h3>
+                {% for post in post %}
+                <!-- <h3>{{ post.title }}</h3> -->
+                <div class="post_block">
+                  <div class="p-2">
+                      <div class="d-flex flex-row user-info">
+                          <img class="rounded-circle" src="{{ post.author.display_image }}" width="40">
+                          <div class="poster_info">
+                              <span class="d-block font-weight-bold name">{{post.author.admin}}</span>
+                              <span class="date text-black-50">Shared at {{ post.created_at|date:"H:iA, M d, Y" }}</span>
+                          </div>
+                      </div>
+                      <div class="mt-2 text_div">
+                          <p class="comment-text"><strong>{{ post.title }}</strong><br><br> {{ post.body }}</p>
+                      </div>
+                  </div>
+
+                  <div class="p-2">
+                      <a type="button" class="show_comment_btn" data-toggle="collapse" data-target="#demo{{ forloop.counter }}">
+                          Comments
+
+                          <span class="comments_count">
+                              {{ commentCount }} comment(s)
+                      </span>
+                      </a>
+                      
+                      
+                      
+                      <div class="comment_line">
+                      </div>
+                  </div>
+                  <div id="demo{{ forloop.counter }}" class="comment_demo collapse">
+                    {% for comment in comments %}
+                      {% if comment.post == post %}
+                      <div class="p-2">
+                          <div class="d-flex flex-row user-info">
+                              {% if comment.author ==  post.author.admin %}
+                              <img class="rounded-circle comment_image" src="{{ comment.author.admin.display_image }}" width="40">
+                              {% else %}
+                              <img class="rounded-circle comment_image" src="{{ comment.author.students.display_image }}" width="40">
+                              {% endif %}
+                              <div class="d-flex flex-column justify-content-start ml-2">
+                                  <span class="d-block font-weight-bold name">{{ comment.author }}</span>
+                                  <span class="date text-black-50">{{ comment.created_at|timesince}} ago</span>
+                              </div>
+                              {% if comment.author == user %}
+                                 <div class="ml-auto delete_student_comment"><a href="{% url 'delete_student_comment' comment_id=comment.id post_id=post.id %}">Delete comment</a></div>
+                              {% endif %}
+                          </div>
+
+                           <div class="mt-2">
+                               <p class="comment-text">{{ comment.body }}</p>
+                          </div>
+                      </div>
+
+                      {% endif %}
+                      {% empty %}
+                      <div class="p-2">There are no comments yet</div>
+
+                    {% endfor %}
+                  
+
+                  </div>
+                  <div class="p-2 student_comment">
+                      <form action="student_comment" method="post" enctype="multipart/form-data">
+                           {% csrf_token %}
+
+                      <div class="d-flex flex-row align-items-start">
+                          <img class="rounded-circle comment_image" src="{{ user.students.display_image }}" width="40">
+                           <input type="hidden" class="form-control"  name="post_id" value="{{ post.id }}">
+                          <textarea placeholder="Add comment..." class="form-control ml-1 shadow-none textarea" name="comment" required></textarea>
+                          <button class="comment_btn" type="submit"><i class="fa fa-paper-plane"></i></button>
+                      </div>
+                      <div class="mt-2 text-right">
+                          
+                      </div>
+                      </form>
+                  </div>
+                </div>
+                {% empty %}
+                <div class="p-2">There are no posts yet</div>
+                {% endfor %}
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

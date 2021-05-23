@@ -2,7 +2,17 @@
 
 {% block main_content %}
 
-<h1>Feedback</h1>
+
+<h3 class="mb-3">Staff feedback</h3>
+
+<div class="form-group mb-4">
+      <label class="mb-0" style="flex: 2;font-size: 20px;color: #6b778c;">Filter feedback: </label>
+    <div class="flex9">
+    <a href="{% url 'student_messages' %}" class="btn btn-outline-primary ml-3">Student feedback</a>
+    <a href="{% url 'staff_messages' %}" class="btn btn-outline-primary ml-3">Staff feedback</a>
+    <a href="{% url 'company_messages' %}" class="btn btn-outline-primary ml-3">Company feedback</a>
+    </div>
+</div>
 
 {% if messages %}
         {% for message in messages %}
@@ -18,12 +28,12 @@
          {% endif %}
         {% endfor %}
       {% endif %}
- <table class="table table-hover">
+ <table class="table">
 
     <thead>
       <tr>
         <th hidden>ID</th>
-        <th>Student Name</th>
+        <th>Staff Name</th>
         <th>Sent on</th>
         <th>Message</th>
         <th>Reply</th>
@@ -33,12 +43,12 @@
      {% for feedback in feedbacks %}
       <tr>
         <td hidden>{{ feedback.id }}</td>
-        <td>{{ feedback.student_id.student.first_name }} {{ feedback.student_id.student.last_name }}</td>
+        <td>{{ feedback.staff_id.staff }}</td>
         <td>{{ feedback.created_at|date:"M d, H:iA, Y"  }}</td>
         <td>{{ feedback.feedback_message }}</td>
         <td>
             {% if feedback.feedback_reply == "" %}
-            <a href="" class="btn btn-outline-info reply_open_modal" data-toggle="modal" data-target="#myModal">Reply</a>
+            <a href="" class="btn btn-sm btn-outline-primary reply_open_modal" data-toggle="modal" data-target="#myModal">Reply</a>
             {% else %}
             {{ feedback.feedback_reply}}
             {% endif %}
@@ -49,7 +59,7 @@
     </tbody>
   </table>
 
-  <div class="modal fade" id="myModal">
+  <div class="modal fade mt-5" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
 
@@ -68,7 +78,7 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-           <button type="button" class="btn btn-outline-info" id="reply_button">Reply</button>
+           <button type="button" class="btn btn-outline-primary" id="reply_button">Reply</button>
         </div>
       </div>
     </div>
@@ -94,7 +104,7 @@
                 var message=$("#reply_message").val()
 
                 $.ajax({
-                        url:'{% url 'feedback_reply' %}',
+                        url:'{% url 'staff_reply' %}',
                         type:'POST',
                         data:{id:id,message:message},
                     })

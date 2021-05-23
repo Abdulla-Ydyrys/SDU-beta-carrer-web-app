@@ -1,37 +1,97 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>SDU Beta Web App for Student</title>
+     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+     <link rel="stylesheet" type="text/css" href="/static/css/student_style.css">
+     <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/static/js/main.js"></script>
+
 </head>
 <body>
 
-<div class="container">
-<div class="row">
+    <div class="root">
+        <div class="inner">
+            {% include 'student_template/header.html'%}
 
+            {% include 'student_template/sidebar.html' with user=user id=id %}
+            <div class="main">
+                <div class="main_inner">
+                    <div class="inner">
+                        <div class="css-q6qqzq">
+                            <div class="outer_line">
+                                {% block main_content %}
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- {% include 'student_template/footer.html'%} -->
+        </div>
+    {% block custom_js %}
 
-    {% include 'student_template/header.html'%}
+    {% endblock custom_js %}
+    </div>
 
-    {% include 'student_template/sidebar.html' with user=user id=id %}
-
-
-<div class="col-10">
-  {% block main_content %}
-    {% endblock %}
-</div>
-
-
-{% include 'student_template/footer.html'%}
-
-</div>
-{% block custom_js %}
-
-{% endblock custom_js %}
-</div>
-
+    <script src="/static/js/main.js"></script>
+    <div role="presentation" class="MuiModal-root MuiPopover-root css-79ws1d-MuiModal-root css-1t7fjoj-MuiModal-root">
+        <div aria-hidden="true" class="MuiBackdrop-root MuiBackdrop-invisible css-re7u0o-MuiBackdrop-root" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"></div>
+        <div tabindex="0" data-test="sentinelStart"></div>
+        <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 MuiPopover-paper css-111g1eb-MuiPaper-root" tabindex="-1" style="transition: opacity 295ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 196ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; opacity: 1; transform: none; top: 54px; right: 20px; transform-origin: 216px 0px;">
+            <div class="css-yj6p2f">
+                <h6 class="MuiTypography-root MuiTypography-subtitle2 css-1o6a83x-MuiTypography-root">{{ user.first_name }} {{ user.last_name }}</h6>
+                <h6 class="MuiTypography-root MuiTypography-subtitle2 css-1th4wo4-MuiTypography-root">Student</h6>
+            </div>
+            <hr class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root">
+            <div class="css-1icgf7x">
+                {% url 'student_profile' as student_profile %}
+                <a class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button MuiMenuItem-root css-12jf6st-MuiButtonBase-root-MuiListItem-root-MuiMenuItem-root" tabindex="-1" role="menuitem" aria-disabled="false" href="{{ student_profile }}">
+                    <div class="MuiListItemIcon-root css-8zsz8k-MuiListItemIcon-root">
+                        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="UserIcon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                            </svg>
+                        </svg>
+                    </div>
+                    <div class="MuiListItemText-root css-tlelie-MuiListItemText-root">
+                        <h6 class="MuiTypography-root MuiTypography-subtitle2 css-1o6a83x-MuiTypography-root">Profile</h6>
+                    </div>
+                    <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"></span>
+                </a>
+                {% url 'edit_student_profile' as edit_student_profile %}
+                <a class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button MuiMenuItem-root css-12jf6st-MuiButtonBase-root-MuiListItem-root-MuiMenuItem-root" tabindex="-1" role="menuitem" aria-disabled="false" href="{{ edit_student_profile }}">
+                    <div class="MuiListItemIcon-root css-8zsz8k-MuiListItemIcon-root">
+                        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="CogIcon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+                            </svg>
+                        </svg>
+                    </div>
+                    <div class="MuiListItemText-root css-tlelie-MuiListItemText-root">
+                        <h6 class="MuiTypography-root MuiTypography-subtitle2 css-1o6a83x-MuiTypography-root">Edit Profile</h6>
+                    </div>
+                    <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"></span>
+                </a>
+            </div>
+            <div class="css-yj6p2f">
+                <a href="{% url 'logout' %}">
+                    <button class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth MuiButtonBase-root css-m8b6ho-MuiButtonBase-root-MuiButton-root" tabindex="0">
+                        <span class="MuiButton-label css-8xplcm-MuiButton-label">Logout</span>
+                        <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"></span>
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div tabindex="0" data-test="sentinelEnd"></div>
+    </div>
 </body>
 </html>

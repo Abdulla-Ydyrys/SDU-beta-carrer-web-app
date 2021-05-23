@@ -2,11 +2,25 @@
 
 {% block main_content %}
 
-<h1>Manage Students</h1>
-{% url 'add_student' as add_student %}
- <a href="{{ add_student }}" class="btn btn-outline-info">Add Student</a>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3>Manage Students</h3>
+    {% url 'add_student' as add_student %}
+     <a href="{{ add_student }}" class="btn btn-outline-primary">Add student</a>
+</div>
 
- <table class="table table-hover">
+<form method="get">
+    <div class="d-flex">
+         <div class="form-group align-items-start flex-column mx-3">
+          <label for="id_student_id">Search by student ID</label>
+            <input type="text" class="form-control" name="student_id" id="id_student_id">
+        </div>
+        <div style="padding-top:30px;">
+            <button type="submit" class="btn btn-outline-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+ <table class="table">
      {% if messages %}
         {% for message in messages %}
           {% if message.tags == 'error' %}
@@ -23,9 +37,8 @@
       {% endif %}
     <thead>
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Username</th>
+        <th>Student</th>
+        <th>ID</th>
         <th>Email</th>
         <th>Gender</th>
         <th>Address</th>
@@ -36,15 +49,18 @@
     <tbody>
      {% for student in students %}
       <tr>
-        <td>{{ student.student.first_name }}</td>
-        <td>{{ student.student.last_name }}</td>
+        <td>{{ student.student.last_name }} {{ student.student.first_name }}</td>
         <td>{{ student.student.username }}</td>
         <td>{{ student.student.email }}</td>
         <td>{{ student.gender }}</td>
         <td>{{ student.address }}</td>
         <td><img src="{{ student.display_image }}" width="100" ></td>
-        <td><a href="{% url 'edit_student' student_id=student.student.id %}" class="btn btn-outline-info">Edit</a>
-            <a href="{% url 'delete_student' student_id=student.student.id %}" class="btn btn-outline-danger">Delete</a></td>
+        <td><a href="{% url 'edit_student' student_id=student.student.id %}">
+            {% include 'admin_template/icons/edit_icon.html'%}
+        </a>
+            <a href="{% url 'delete_student' student_id=student.student.id %}">
+            {% include 'admin_template/icons/delete_icon.html'%}
+            </a></td>
       </tr>
 
      {% endfor %}
@@ -52,6 +68,24 @@
   </table>
 
 
-
+<div class="d-flex justify-content-center">
+{% if students.has_previous %}
+        <a href="{% url 'manage_student' %}?page=1" class="btn btn-outline-primary">First</a>
+        <a href="{% url 'manage_student' %}?page={{ students.previous_page_number }}" class="btn btn-outline-primary">Previous Page</a>
+{% endif %}
+{% if students.paginator.page_range|length > 1%}
+{% for num in students.paginator.page_range %}
+    {% if students.number == num %}
+         <a href="{% url 'manage_student' %}?page={{ num }}" class="btn btn-primary">{{ num }}</a>
+    {% elif num > students.number|add:'-3' and num < students.number|add:'3' %}
+        <a href="{% url 'manage_student' %}?page={{num}}" class="btn btn-outline-primary">{{num}}</a>
+    {% endif %}
+{% endfor %}
+{% endif %}
+{% if students.has_next %}
+         <a href="{% url 'manage_student' %}?page={{ students.next_page_number }}" class="btn btn-outline-primary">Next Page</a>
+         <a href="{% url 'manage_student' %}?page={{ students.paginator.num_pages }}" class="btn btn-outline-primary">Last</a>
+{% endif %}
+</div>
 
 {% endblock %}

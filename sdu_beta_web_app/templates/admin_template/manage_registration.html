@@ -2,56 +2,56 @@
 
 {% block main_content %}
 
-<h1>Manage Registration</h1>
+<h3 class="mb-4">Manage Registration</h3>
 
 
 <form action="/set_end_date" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-<div class="form-group col-5">
+    <div class="d-flex align-items-end">
+    <div class="form-group col-5 p-0 flex-column align-items-start">
       <label >Choose end of registration date:</label>
       <input type="datetime-local" class="form-control"  name="expiry_date" value="{{exp_date.end_date|date:'Y-m-d\TH:i'}}">
-</div>
+    </div>
+    <div class="form-group ml-3">
+         <button type="submit" class="btn btn-outline-primary">Save date</button>
+    </div>
+    </div>
 
-       <div class="form-group col-2">
-    <button type="submit" class="btn btn-primary">Set date</button>
-       </div>
   </form>
 
 <form method="get">
-    <div class="container">
-    <div class="row ">
+    <div class="d-flex mt-4">
 
-    <div class="form-group">
+    <div class="form-group flex-column align-items-start">
       <label for="id_student_id">Search by student ID</label>
         <input type="text" class="form-control" name="student_id" id="id_student_id">
     </div>
 
-     <div class="form-group offset-md-1">
+     <div class="form-group flex-column align-items-start ml-3">
       <label for="id_beta_type">Beta type:</label>
         <select class="form-control" name="beta_type" id="id_beta_type">
-        <option value="">---------</option>
-        <option value="SDU Beta">SDU Beta</option>
-        <option value="Academic Beta">Academic Beta</option>
-        <option value="Industrial Beta">Industrial Beta</option>
-    </select>
+          <option value="">---------</option>
+          <option value="SDU Beta">SDU Beta</option>
+          <option value="Academic Beta">Academic Beta</option>
+          <option value="Industrial Beta">Industrial Beta</option>
+        </select>
      </div>
 
-      <div class="form-group offset-md-1">
-      <label for="id_registration_status">Registrations Status</label>
+      <div class="form-group flex-column align-items-start ml-3">
+      <label for="id_registration_status">Registrations status</label>
         <select class="form-control" name="registration_status" id="id_registration_status">
         <option value="">---------</option>
-         <option value="0">Pending</option>
-            <option value="1">Approved</option>
-            <option value="2">Rejected</option>
+        <option value="0">Pending</option>
+        <option value="1">Approved</option>
+        <option value="2">Rejected</option>
 
     </select>
      </div>
 
-        <div class="offset-md-1" style="padding-top:30px;">
-    <button type="submit" class="btn btn-outline-info">Search</button>
+        <div class="ml-3" style="padding-top:32px;">
+    <button type="submit" class="btn btn-outline-primary">Search</button>
               </div>
          </div>
-        </div>
 </form>
 
 {% if messages %}
@@ -69,54 +69,71 @@
         {% endfor %}
       {% endif %}
 
- <table class="table table-hover">
+ <table class="table mt-4">
 
     <thead>
       <tr>
         <th hidden>ID</th>
-        <th>Name</th>
+        <th>Student</th>
           <th>SDU ID</th>
         <th>Supervisor</th>
         <th>Beta type</th>
         <th>Agreement</th>
-        <th>Action</th>
-        <th width="10%"></th>
+        <th>Status</th>
+        <th style="min-width: 160px;">Action</th>
+        <th width="10%">Reason</th>
       </tr>
     </thead>
     <tbody>
      {% for registration in registrations %}
       <tr>
           <td hidden>{{ registration.id }}</td>
-        <td>{{ registration.student_id.student.first_name }} {{ registration.student_id.student.last_name }}</td>
+        <td>{{ registration.student_id.student.last_name }} {{ registration.student_id.student.first_name }} </td>
           <td>{{ registration.student_id.student.username }}</td>
-        <td>{{ registration.supervisor_id.username }}</td>
-        <td>{{ registration.beta_type }}</td>
+           {% if registration.supervisor_id.user_type == "2" %}
+              <td>{{ registration.supervisor_id.last_name }} {{ registration.supervisor_id.first_name }}</td>
+           {% elif registration.supervisor_id.user_type == "3" %}
+              <td>{{ registration.supervisor_id.username }} / {{ registration.supervisor_id.last_name }} {{ registration.supervisor_id.first_name }}</td>
+              {% endif %}
+         <td>{{ registration.beta_type }}</td>
         <td><a href="{{ registration.agreement }}" download>Download</a></td>
+
+          <td>
+              {% if registration.registration_status == 0 %}
+              Pending
+              {% elif registration.registration_status == 1 %}
+              Approved
+              {% else %}
+              Rejected
+              {% endif %}
+          </td>
         <td> {% if registration.registration_status == 0 %}
-            <a href="{% url 'reg_approve' student_id=registration.student_id.id %}" class="btn btn-outline-info">Approve</a>
-            <a href="{% url 'reg_reject' student_id=registration.student_id.id %}" class="btn btn-outline-danger">Reject</a>
+            <a href="{% url 'reg_approve' student_id=registration.student_id.id %}" class="btn btn-sm btn-outline-primary">Approve</a>
+            <a href="{% url 'reg_reject' student_id=registration.student_id.id %}" class="btn btn-sm btn-outline-danger">Reject</a>
             {% elif registration.registration_status == 1 %}
-             <span class="alert alert-success">Approved</span>
-            <a href="{% url 'reg_cancel' student_id=registration.student_id.id %}" class="btn btn-outline-danger">Cancel</a>
+            <a href="{% url 'reg_cancel' student_id=registration.student_id.id %}" class="btn btn-sm btn-outline-primary">Cancel approve</a>
             {% else %}
-             <span class="alert alert-danger">Rejected</span>
-            <a href="{% url 'reg_cancel' student_id=registration.student_id.id %}" class="btn btn-outline-danger">Cancel</a>
+            <a href="{% url 'reg_cancel' student_id=registration.student_id.id %}" class="btn btn-sm btn-outline-primary">Cancel reject</a>
+            {% endif %}
         </td>
+          {% if registration.registration_status == 2 %}
           <td>
                {% if registration.reject_reason == "" %}
-              <a href="" class="btn btn-outline-info reply_open_modal" data-toggle="modal" data-target="#myModal">Specify Reason</a>
+              <a href="" class="btn btn-outline-primary btn-sm reply_open_modal" data-toggle="modal" data-target="#myModal">Specify Reason</a>
                  {% else %}
-             <span>REASON: </span> {{ registration.reject_reason}}
-            {% endif %}
+             {{ registration.reject_reason}}
             {% endif %}
         </td>
+          {% else %}
+          <td></td>
+          {% endif %}
       </tr>
 
      {% endfor %}
     </tbody>
   </table>
 
- <div class="modal fade" id="myModal">
+ <div class="modal fade mt-5" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
 
@@ -135,12 +152,31 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-           <button type="button" class="btn btn-outline-info" id="reply_button">Reply</button>
+           <button type="button" class="btn btn-primary" id="reply_button">Reply</button>
         </div>
       </div>
     </div>
   </div>
 
+<div class="d-flex justify-content-center">
+{% if registrations.has_previous %}
+        <a href="{% url 'manage_registration' %}?page=1" class="btn btn-outline-primary">First</a>
+        <a href="{% url 'manage_registration' %}?page={{ registrations.previous_page_number }}" class="btn btn-outline-primary">Previous Page</a>
+{% endif %}
+{% if registrations.paginator.page_range|length > 1%}
+{% for num in registrations.paginator.page_range %}
+    {% if registrations.number == num %}
+         <a href="{% url 'manage_registration' %}?page={{ num }}" class="btn btn-primary">{{ num }}</a>
+    {% elif num > registrations.number|add:'-3' and num < registrations.number|add:'3' %}
+        <a href="{% url 'manage_registration' %}?page={{num}}" class="btn btn-outline-primary">{{num}}</a>
+    {% endif %}
+{% endfor %}
+  {% endif %}
+{% if registrations.has_next %}
+         <a href="{% url 'manage_registration' %}?page={{ registrations.next_page_number }}" class="btn btn-outline-primary">Next Page</a>
+         <a href="{% url 'manage_registration' %}?page={{ registrations.paginator.num_pages }}" class="btn btn-outline-primary">Last</a>
+{% endif %}
+</div>
 
 {% endblock %}
 

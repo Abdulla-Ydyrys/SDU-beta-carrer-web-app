@@ -1,11 +1,25 @@
 {% extends 'student_template/base.html' %}
 
 {% block main_content %}
-
-<h1>Reports</h1>
-
- {% for report in report %}
-  <a href="report\{{ report.id }}" class="list-group-item list-group-item-action">{{report.report_name}}</a>
-  {% endfor %}
+<!-- 
+<h1>Reports</h1> -->
+	
+	<div class="report_page">
+		<div class="p-2 report_page_inner">
+	        <h3 class="page_title">Reports</h3>
+			{% for report in report %}
+			<a href="report\{{ report.id }}" class="list-group-item list-group-item-action">
+				<i>Week {{forloop.counter}} </i> 
+			    <h5>{{report.report_name}}</h5>
+			    <p class="report_time">Due date: {{ report.due_date|date:"M d, H:iA, Y"}}</p>
+			    <p class="report_text">
+			    	{{report.report_detail}}
+		        </p>
+			 </a>
+			{% empty %}
+	        <div class="p-2">There are no reports yet</div>
+			{% endfor %}
+		</div>
+	</div>
 
 {% endblock main_content %}

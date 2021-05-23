@@ -2,11 +2,25 @@
 
 {% block main_content %}
 
-<h1>Manage Companies</h1>
-{% url 'add_company' as add_company %}
- <a href="{{ add_company }}" class="btn btn-outline-info">Add Company</a>
+<div class="d-flex align-items-center justify-content-between mb-4">
+    <h3>Manage Companies</h3>
+    {% url 'add_company' as add_company %}
+    <a href="{{ add_company }}" class="btn btn-outline-primary">Add company</a>
+</div>
 
- <table class="table table-hover">
+<form method="get">
+    <div class="d-flex">
+         <div class="form-group align-items-start flex-column mx-3">
+          <label for="id_company_id">Search by Company Name</label>
+            <input type="text" class="form-control" name="company_id" id="id_company_id">
+        </div>
+        <div style="padding-top:30px;">
+            <button type="submit" class="btn btn-outline-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+ <table class="table">
     {% if messages %}
         {% for message in messages %}
           {% if message.tags == 'error' %}
@@ -23,31 +37,93 @@
       {% endif %}
     <thead>
       <tr>
-        <th>Username</th>
+        <th>Company supervisor</th>
+          <th>Company Name</th>
         <th>Email</th>
         <th>Address</th>
         <th>Image</th>
         <th>Action</th>
+        <th><button type="submit" class="btn btn-outline-primary d-flex ml-auto" id="check_btn">Whitelist</button></th>
       </tr>
     </thead>
     <tbody>
      {% for company in companies %}
       <tr>
+        <td>{{ company.company.first_name }} {{ company.company.last_name }}</td>
         <td>{{ company.company.username }}</td>
         <td>{{ company.company.email }}</td>
         <td>{{ company.address }}</td>
         <td><img src="{{ company.display_image }}" width="100"></td>
 
-        <td><a href="{% url 'edit_company' company_id=company.company.id %}" class="btn btn-outline-info">Edit</a>
-           <a href="{% url 'delete_company' company_id=company.company.id %}" class="btn btn-outline-danger">Delete</a>
+        <td><a href="{% url 'edit_company' company_id=company.company.id %}">
+            {% include 'admin_template/icons/edit_icon.html'%}
+
+        </a>
+           <a href="{% url 'delete_company' company_id=company.company.id %}">
+            {% include 'admin_template/icons/delete_icon.html'%}
+           </a>
         </td>
+           <td><input type="checkbox" name="whitelist[]" value="{{ company.id }}" {% if company.in_whitelist %}checked{% endif %}></td>
       </tr>
 
      {% endfor %}
+
+
     </tbody>
   </table>
 
 
+<div class="d-flex justify-content-center">
+{% if companies.has_previous %}
+        <a href="{% url 'manage_company' %}?page=1" class="btn btn-outline-primary">First</a>
+        <a href="{% url 'manage_company' %}?page={{ companies.previous_page_number }}" class="btn btn-outline-primary">Previous Page</a>
+{% endif %}
+{% if companies.paginator.page_range|length > 1%}
+{% for num in companies.paginator.page_range %}
+    {% if companies.number == num %}
+         <a href="{% url 'manage_company' %}?page={{ num }}" class="btn btn-primary">{{ num }}</a>
+    {% elif num > companies.number|add:'-3' and num < companies.number|add:'3' %}
+        <a href="{% url 'manage_company' %}?page={{num}}" class="btn btn-outline-primary">{{num}}</a>
+    {% endif %}
+{% endfor %}
+  {% endif %}
+{% if companies.has_next %}
+         <a href="{% url 'manage_company' %}?page={{ companies.next_page_number }}" class="btn btn-outline-primary">Next Page</a>
+         <a href="{% url 'manage_company' %}?page={{ companies.paginator.num_pages }}" class="btn btn-outline-primary">Last</a>
+{% endif %}
+</div>
 
 
 {% endblock %}
+
+{% block custom_js %}
+<script>
+   $(document).ready(function(){
+    $("#check_btn").click(function(){
+        var id = [];
+        var uncheck_id = [];
+        $(":checkbox:not(:checked)").each(function(i){
+            uncheck_id[i]=$(this).val()
+        })
+        $(":checkbox:checked").each(function(i){
+            id[i]=$(this).val()
+        })
+        if(id.length === 0){
+           alert("Please select companies");
+        }else{
+           $.ajax({
+              url:'{% url 'whitelist' %}',
+              type:'POST',
+              data:{id, uncheck_id},
+           })
+           .done(function(response){
+                 location.reload()
+           })
+           .fail(function(){
+                 alert("Error")
+           })
+        }
+    })
+ })
+</script>
+{% endblock custom_js %}

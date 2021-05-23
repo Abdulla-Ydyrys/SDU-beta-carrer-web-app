@@ -1,0 +1,924 @@
+/*SideBar scroll*/
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #999; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #888; 
+}
+/*Home page*/
+.service-item {
+    margin-bottom: 55px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.service-item .si-head {
+	display: flex;
+	align-items: center;
+    margin-bottom: 20px;
+}
+.si-head h5 {
+	margin-left: 10px;
+	font-size: 15px;
+}
+
+.service-item ul {
+    margin: 0px;
+    padding: 10px 20px;
+}
+
+.service-item ul li, .service-item p {
+    font-size: 14px;
+} 
+.student_feedback .table thead, .teacher_vacancy_list_page .table thead, .my_student_page .table thead, .staff_feedback_inner .table thead, .view_respond_page .table thead {
+    background: #FAFBFC;
+    color: #6B778C;
+    border: 1px solid #dee2e6;
+}
+.student_feedback .table td, .student_feedback .table th .teacher_vacancy_list_page .table th, .my_student_page .table th, .staff_feedback_inner .table th, .view_respond_page .table th {
+    padding: 10px;
+    vertical-align: inherit;
+    font-size: 14px;
+    border-top: 0;
+}
+.student_feedback .table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+.student_feedback .table tr, .student_feedback .table th, .student_feedback .table td, .grades_list_page .table tr, .grades_list_page .table th, .grades_list_page .table td, .teacher_vacancy_list_page .table tr, .teacher_vacancy_list_page .table th, .teacher_vacancy_list_page .table td, .my_student_page .table tr, .my_student_page .table th, .my_student_page .table td, .staff_feedback_inner .table tr, .staff_feedback_inner .table th, .staff_feedback_inner .table td, .view_respond_page .table tr, .view_respond_page .table th, .view_respond_page .table td {
+    border: 1px solid #EBECF0;
+    border-bottom: 1px solid #EBECF0;
+}
+.student_feedback tbody td, .grades_list_page tbody td, .teacher_vacancy_list_page tbody td {
+	background-color: #ffffff;
+}
+/*.btn-primary, .btn-primary:hover, a.add_vacancy, a.add_vacancy:hover, .save_grade, .save_grade:hover {
+    background: rgb(86, 100, 210) !important;
+    color: #fff;
+}*/
+.btn-primary:focus, .btn-primary:active, a.add_vacancy:focus, a.add_vacancy:active, .save_grade:focus, .save_grade:active {
+    box-shadow: 0 0 0 0.2rem rgb(86 100 210 / 50%) !important;
+}
+.form-control:focus {
+    border-color: #5664d2;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(86 100 210 / 25%);
+}
+a.add_vacancy, .save_grade {
+	float: right;
+	margin-bottom: 1rem;
+}
+button.send_feedback {
+    float: right;
+    margin-bottom: 45px;
+}
+.table-hover tbody tr:hover {
+    background-color: transparent;
+}
+
+/*end of Home Page*/
+
+/*Profile*/
+.profile_flex {
+    display: flex;
+    align-items: center;
+}
+.profile_flex label {
+    flex: 1;
+}
+.flex9, .profile_flex input {
+    flex: 9;
+}
+/*end profile style*/
+
+/*Report style*/
+
+.outer_line {
+    background: #FDFDFF;
+    border: 1px solid #EBEBEB;
+    box-sizing: border-box;
+    border-radius: 18px;
+    overflow: hidden;
+    padding: 20px;
+    position: relative;
+}
+a.list-group-item {
+    background: white;
+    border-radius: 0 0.5rem 0.5rem 0.5rem;    
+    margin-top: 1.3rem;
+    min-height: 3rem;
+    padding: 1rem 1rem 1rem 3rem;
+    position: relative;
+}
+.report_page a i {
+	/*background: linear-gradient(135deg, #ffffff 0%,#5664d2 100%);*/
+	background-color: #FAFBFC;
+	border: 1px solid #EBECF0;
+    border-radius: 1rem 1rem 0 1rem;
+    content: '';
+    height: 3rem;
+    left: -1rem;
+    overflow: hidden;
+    position: absolute;
+    top: -1rem;
+    width: 3rem;
+    /*align-items: flex-end;*/
+    color: #000;
+    display: flex;
+    /*font: 900 1.5em/1 'Montserrat';
+    justify-content: flex-end;*/
+    padding: 0.125em 0.25em;
+    z-index: 1;
+
+    align-items: center;
+    font: 900 18px/1 'Montserrat';
+    justify-content: center;
+    padding: 7px 0px;
+    text-align: center;
+    font-size: 0.875rem;
+}
+.list-group-item-action {
+    width: 85%;
+    color: #495057;
+    text-align: inherit;
+    margin: 0 auto;
+}
+.report_time {
+	position: absolute;
+	right: 15px;
+	top: 20px;
+	font-size: 13px;
+}
+.report_text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 265px;
+    font-size: 0.875rem;
+    margin-bottom: 0px;
+}
+
+.btn-outline-primary:hover {
+    border-color: rgb(86, 100, 210);
+}
+.submit_report_btn,  .cancel_report_btn, .staff_vacancy_submit {
+    float: right;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/*Grades_list_page*/
+
+/*.grades_list_page {
+	width: 85%;
+	margin: 0 auto;
+	padding: 25px;
+}*/
+.grades_list_page .header_info {
+    margin-bottom: 30px;
+}
+.table td, .table th {
+    padding: 10px;
+    text-align: center;
+    vertical-align: inherit;
+    font-size: 14px;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+}
+.report_page .table td, .report_page .table th {
+    text-align: left;
+}
+.grades_list_page .table td, .grades_list_page .table td {
+	padding-top: 5px;
+}
+.table thead th {
+    border-bottom: 1px solid #dee2e6;
+}
+.grades_list_page table.grades_table td, .grades_list_page table.grades_table th {
+	padding: 12px;
+}
+.grades_list_page .header_info div {
+	display: flex;
+}
+.grades_list_page .header_info p{
+    padding: 15px 25px;
+    width: calc(50%);
+    margin: 7px 0px 7px 0px;
+    background: #FAFBFC;
+    font-weight: bold;
+    color: #6B778C;
+    border: 1px solid #dee2e6;
+}
+.grades_list_page .header_info div p:first-child {
+	margin-right: 14px !important;
+}
+.grades_list_page table.grades_table {
+	margin-bottom: 30px;
+}
+.grades_list_page table.grades_table tr {
+    border-top: 1px solid #dee2e6;
+}
+.grades_list_page table.grades_table tr:last-child {
+	border-bottom: 1px solid #dee2e6;
+}
+.grades_list_page table.grades_table tr th, .grades_list_page table.grades_table tr td {
+	border: none;
+    border-right: 1px solid #dee2e6;
+    background: #fafbfc;
+    color: #6b778c;
+}
+.grades_list_page table.grades_table tr th:last-child, .grades_list_page table.grades_table tr td:last-child {
+	border-right: none;
+}
+.grade_conversions {
+	width: 500px;
+    margin: 70px auto 0px;
+}
+.grade_conversions tr:last-child {
+    border-bottom: 1px solid #dee2e6;
+}
+.grade_conversions .table {
+    background-color: #fafbfc;
+    color: #6b778c;
+}
+
+/*Registration page*/
+@media (min-width: 576px) {
+	.modal-dialog {
+	    max-width: 400px;
+	    margin: 5.75rem auto;
+	}
+	
+}
+.cancel_register_modal .cancel_register.close {
+	float: right;
+	width: 64px;
+	border-top-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	background-color: transparent !important;
+	font-size: 31px;
+	color: #212529;
+}
+.cancel_register_modal .cancel_register.close:hover {
+    background: transparent;
+    border: none;
+    text-decoration: none;
+}
+.cancel_register_modal .modal-footer {
+	display: flex;
+    justify-content: flex-end;
+    flex-wrap: initial;
+}
+.cancel_register_modal .modal-footer a {
+	margin-bottom: 0px !important;
+    padding: 8px !important;
+    line-height: 21px;
+    margin: 0px;
+    outline: none;
+}
+
+.cancel_register_modal button.btn-outline-info {
+    background-color: #F45E5E !important;
+    outline: none;
+    border:none;
+}
+.cancel_register_modal a.btn-outline-danger {
+	color: #fff !important;
+	border: none !important;
+    background-color: rgb(176,194,199) !important;
+}
+.cancel_register_modal button.btn-outline-info:hover {
+	background-color: #F45E5E;
+    border: 1px solid #F45E5E;
+}
+.cancel_register_modal a.btn-outline-danger:hover {
+	background-color: rgb(176,194,199);
+    border: 1px solid rgb(176,194,199);
+}
+
+.beta_registration {
+	display: flex;
+    width: 85%;
+    margin: 30px auto;
+}
+.beta_registration .left_side, .right_side {
+	width: 50%;
+}
+.left_side {
+	background: #f4f5f7;
+    padding: 30px 40px;
+}
+.beta_registration .left_side form {
+    padding: 20px 35px;
+}
+.left_side .expiration_date {
+	display: flex;
+}
+.left_side .expiration_date .fa-calendar {
+    font-size: 40px;
+    padding: 8px 16px 8px 0px;
+    color: #5664d2;
+}
+.left_side .expiration_date .exp_date h5{
+	margin-bottom: 0px;
+}
+.left_side .expiration_date .exp_date label {
+    border-bottom: 4px solid #5664d2;
+}
+.left_side label, .left_side .form-control {
+	font-size: 14px;
+}
+#customFile {
+	height: auto;
+	padding: 0px;
+    line-height: 28px;
+    cursor: pointer;
+}
+.left_side button.btn {
+	margin-top: 10px;
+    background: #5664d2;
+}
+.left_side button.btn:hover {
+    background-color: #0057b4;
+}
+.form-group .choose_btn {
+    width: 100%;
+    border-radius: .25rem;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    font-size: 14px;
+}
+
+.choose_btn  label {
+    background-color: #5664d2;
+    color: white;
+    padding: .375rem .75rem;
+    font-family: sans-serif;
+    border-radius: 0px;
+    cursor: pointer;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    flex: 0 0 100px;
+}
+
+#file-chosen{
+    margin-left: 0.3rem;
+    font-family: sans-serif;
+    overflow: hidden;
+    white-space: pre;
+    text-overflow: ellipsis;
+    margin-bottom: 0;
+    padding-top: 6px;
+}
+
+.right_side {
+	position: relative;
+	background-image: url("/static/img/beta_registration_background.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.right_side_background {
+    width: 100%;
+    height: 100%;
+    background: #5664d2a1;
+}
+.text-background {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 42%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 14px;
+}
+
+
+
+.registration_page .registration_card {
+	/*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
+	background-color: #f4f5f7;
+	max-width: 400px;
+	margin: 0px auto;
+	text-align: center;
+	font-family: arial;
+	border-radius: 0px;
+	border: none;
+    padding: 20px 35px;
+}
+.title_approved {
+	color: #39a501;
+}
+.title_rejected {
+	color: #fe0000;
+}
+.title_pending {
+	color: #ffb039;
+}
+.registration_card .line {
+    height: 6px;
+    width: 100%;
+}
+.registration_card .line.approved {
+	background: #39a501;
+}
+.registration_card .line.rejected {
+	background: #fe0000;
+}
+.registration_card .line.pending {
+	background: #ffb039;
+}
+
+.registration_page .title {
+  /*color: #D8000C;*/
+  color: #fe0000;
+  font-size: 18px;
+}
+.status_btn {
+    padding: 8px 25px;
+	color: #fff;
+	line-height: 1.5;
+    border-radius: .25rem;
+}
+.status_btn.approved {
+	background-color: #39a501;
+}
+.status_btn.reject {
+	background-color: #fe0000;
+}
+.status_btn.pending {
+   	background-color: rgb(255,176,57);
+}
+
+.registration_page .cancel_register_modal button, button.confirm {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 14px;
+}
+
+.registration_page a {
+  text-decoration: none;
+  font-size: 14px;
+  color: black;
+}
+.registration_page a.btn-outline-danger {
+    color: #fe0000;
+    margin-bottom: 20px;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 14px;
+    border-color: #fe0000;
+}
+.registration_page a.btn-outline-danger:hover {
+	color: #fff;
+	background-color: #fe0000;
+}
+.registration_page .registration_info {
+    background: rgb(248,250,249);
+    margin-bottom: 20px;
+    padding: 12px 0px;
+    font-size: 14px;
+}
+.registration_page .registration_info table {
+	margin: 0 auto;
+	width: 100%;
+}
+.registration_page .registration_info tr th {
+    text-align: left;
+    font-weight: 100;
+    color: #212529;
+    padding: 10px;
+}
+.registration_page .registration_info tr td {
+	text-align: right;
+    color: #212529;
+    padding: 0px 10px;
+}
+.registration_card h2 {
+	border-radius: 0px;
+    padding: 2px;
+}
+.registration_card .alert-warning {
+    background-color: rgb(255,176,57);
+    border-color: rgb(255,176,57);
+}
+.registration_card .alert-danger {
+	color: #D8000C;
+}
+
+/*progressbar*/
+#progressbar {
+	margin-bottom: 30px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+    width: 85%;
+    margin: 30px auto 20px; 
+    text-align: center;
+}
+#progressbar li {
+	list-style-type: none;
+	color: #4f4f4f;
+	text-transform: uppercase;
+	font-size: 13px;
+	width: 33.33%;
+	float: left;
+	position: relative;
+    font-weight: 500;
+}
+#progressbar li.active span {
+    color: #27ae60;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+    width: 25px;
+    line-height: 25px;
+    display: block;
+    font-size: 14px;
+	color: #333;
+	background: #f4f5f7;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+    position: relative;
+    z-index: 100;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: #f4f5f7;
+	position: absolute;
+	left: -50%;
+	top: 9px;
+	z-index: 0; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #27AE60;
+	color: #fff;
+}
+#progressbar li.active_rejecteed:before, #progressbar li.active_rejecteed:after {
+    background: #fe0000;
+    color: white;
+}
+#progressbar li.active_rejecteed span {
+	color: #fe0000;
+}
+#progressbar li.active_pending:before, #progressbar li.active_pending:after {
+	background: #ffb039;
+	color: #fff;
+}
+#progressbar li.active_pending span {
+	color: #ffb039;
+}
+
+
+/*Post style*/
+
+/*.view_post {
+	background: #FDFDFF;
+    border: 1px solid #EBEBEB;
+    box-sizing: border-box;
+    border-radius: 18px;
+    overflow: hidden;
+    padding: 20px;
+}*/
+
+.view_post img.rounded-circle {
+	width: 50px;
+    height: 50px;
+    text-align: center;
+    object-fit: cover;
+}
+.page_title {
+	font-family: Gilroy;
+	font-style: normal;
+	font-weight: bold;
+	line-height: 24px;
+    color: rgb(86, 100, 210);
+    margin-bottom: 30px;
+}
+.poster_info {
+	margin-left: 8px;
+	margin-top: 3px;
+}
+.poster_info .name, .comment_demo .name {
+	font-family: Gilroy;
+    font-style: normal;
+    font-weight: 600 !important;
+    font-size: 18px;
+    line-height: 21px;
+    color: #4F4F4F
+}
+.poster_info .date.text-black-50, .comment_demo .date.text-black-50 {
+    font-weight: 500 !important;
+    font-size: 12px;
+    line-height: 14px;
+    color: #979797 !important;
+}
+.view_post .p-2 .mt-2.text_div, .comment_demo .mt-2 {
+	border-left: 2px solid #5664d2;
+    min-height: 40px;
+    margin-left: 56px;
+    padding: 2px 16px 4px;
+    height: max-content;
+}
+.comment_demo .mt-2  {
+    min-height: 19px;
+    margin-left: 43px;
+    padding: 2px 8px 4px;
+}
+.student_comment {
+	margin-top: 8px;
+    margin-bottom: 12px;
+}
+.view_post .p-2 .mt-2 p.comment-text, .view_post .comment_demo .mt-2 p.comment-text {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.01em;
+    color: #4F4F4F;
+    margin-bottom: 0pc;
+}
+.view_post img.rounded-circle.comment_image {
+	width: 36px;
+	height: 36px;
+}
+.show_comment_btn {
+    margin-left: 56px;
+    color: #4f4f4f;
+    font-weight: 500;
+    width: 88%;
+}
+.show_comment_btn:hover {
+	color: #4f4f4f;
+}
+.comment_line {
+	border: 1px solid;
+    border-top: 0px;
+    margin-left: 56px;
+    margin-right: 56px;
+    border-color: #DEDEDF;
+    margin-top: 5px;
+}
+.comments_count {
+	float: right;
+    color: #a7a9a4;
+    font-size: 14px;
+}
+.view_post .comment_demo {
+	margin-left: 56px;
+}
+.view_post .view_post_inner textarea {
+	width: 456px;
+    height: 36px;
+    background: #FDFDFF;
+    border: 1px solid #EBEBEB;
+    box-sizing: border-box;
+    border-radius: 8px;
+    overflow: hidden;
+    resize: none;
+    padding: 10px 70px 0px 16px;
+    font-family: Gilroy;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+
+	color: #979797;
+}
+form .d-flex.flex-row.align-items-start {
+	position: relative;
+	width: max-content;
+	margin-left: 56px;
+}
+form .d-flex.flex-row.align-items-start button.comment_btn {
+	position: absolute;
+    right: 20px;
+    top: 5px;
+    border: none;
+    background: #fff;
+}
+form .d-flex.flex-row.align-items-start button.comment_btn i {
+	color: #4F4F4F;
+}
+.delete_student_comment {
+    margin-right: 56px;
+}
+.delete_student_comment a {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.01em;
+    color: #E04444;
+}
+form .d-flex.flex-row.align-items-start .ml-1 {
+	margin-left: 16px !important;
+}
+
+
+
+/*Vacancy List*/
+
+.vacancy_list  .bloko-link {
+	display: inline;
+    outline: none;
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 19px;
+    background: transparent;
+	padding-top: 3px;
+}
+.vacancy_list_inner .name, .vacancy_list_inner .date{
+	color: #999;
+    font-size: 12px;
+}
+.vacancy_list_inner img {
+	width: 40px;
+    height: 40px;
+    text-align: center;
+    object-fit: cover;
+}
+.vacancy_list_inner .vacancy_block, .post_block {
+    padding: 20px;
+    border-bottom: 1px solid #e7e7e7;
+    position: relative;
+    margin-top: -1px;
+    font-size: 14px;
+    line-height: 1.571;
+}
+
+.vacancy_list_inner .vacancy_block:last-child, .post_block:last-child {
+	border-bottom: none;
+}
+.vacancy_list_inner .vacancy_header_side {
+	display: flex;
+}
+.vacancy_list_inner .vacancy_header_side  .bloko-link {
+    flex-basis: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 6px;
+}
+.vacancy_list_inner .vacancy_header_side  .mt-2 {
+	flex: 0 0 auto;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.vacancy_list_inner .vacancy_header_side  .mt-2 p {
+    font-weight: 500;
+    margin-bottom: 0px;
+}
+.vacancy_body {
+    padding-top: 0px !important;
+    margin-top: -5px;
+}
+.vacancy_body .user-info {
+	margin-bottom: 6px;
+}
+.vacancy_block form .form-group {
+	width: max-content;
+}
+.vacancy_block form .mt-2 {
+    position: absolute;
+    top: 20px;
+    right: 0px;
+}
+.vacancy_block form .mt-2  button.btn-sm {
+	padding: .375rem .75rem;
+}
+.vacancy_view {
+    color: #5664d2;
+    border-color: #5664d2;
+}
+.resume_btn {
+	color: #5664d2;
+    border-color: #5664d2;
+}
+.vacancy_view:hover, .vacancy_view:not(:disabled):not(.disabled):active, .vacancy_view:focus {
+    color: #fff;
+    background-color: #5664d2;
+    border-color: #5664d2;
+}
+.vacancy_view:not(:disabled):not(.disabled):active:focus{
+    box-shadow: 0 0 0 0.2rem rgb(86 100 210 / 50%);
+}
+.btn-outline-primary {
+    border: 1px solid rgb(86, 100, 210);
+    color: rgb(86, 100, 210);
+}
+.modal_primary {
+    width: 50% !important;
+}
+.btn-outline-primary:hover {
+    background-color: rgb(86, 100, 210);
+}
+.modal_danger {
+    color: #dc3545 !important;
+    border: 1px solid #dc3545 !important;
+    background-color: transparent !important;
+    width: 50% !important;
+}
+.modal_danger:hover {
+    color: #fff !important;
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+}
+.view_back_btn:hover {
+    background-color: rgb(86, 100, 210);
+}
+.view_back_btn {
+    float: right;
+    margin-top: -44px;
+    margin-bottom: 25px;
+    margin-right: 3px;
+}
+.resume_btn:hover {
+	color: #fff;
+    background-color: #5664d2;
+    border-color: #5664d2;
+}
+.choose_btn.for_resume {
+	padding: 0px 12px 0px 0px;
+}
+.btn-outline-primary:not(:disabled):not(.disabled):active {
+	background-color: #5664d2;
+    border-color: #5664d2;
+}
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:focus {
+	box-shadow: 0 0 0 0.2rem rgb(86 100 210 / 50%);
+}
+.respond_pending, .approved_btn, .rejected_btn {
+	float: right;
+    padding: .375rem .75rem;
+    margin: 5px;
+}
+.respond_pending {
+    cursor: no-drop;
+}
+.rejected_btn, .rejected_btn:active, .rejected_btn:hover, .rejected_btn:focus {
+	background-color: #F45E5E;
+	border-color: #F45E5E;
+	color: #fff;
+}
+.respond_cancel {
+	float: right;
+    padding: 8px;
+    line-height: 17px;
+    margin: 5px;
+    outline: none;
+    background-color: rgb(176,194,199);
+    border-color: rgb(176,194,199);
+}
+.respond_cancel:not(:disabled):not(.disabled):active, .btn-warning.respond_cancel:hover, .respond_cancel:focus, .respond_cancel:not(:disabled):not(.disabled):active:focus {
+	background-color: rgb(140 162 168);
+	border-color: rgb(140 162 168);
+	box-shadow: 0 0 0 0.2rem rgb(140 162 168 / 50%);
+	color: #fff;
+}
+.attached_resume {
+	margin-bottom: 0px;
+    padding-top: 10px !important;
+    outline: none;
+}
+
+
+

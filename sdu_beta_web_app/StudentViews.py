@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from sdu_beta_web_app.models import *
 from django.core.files.storage import FileSystemStorage
-import datetime
+
 
 def student_home(request):
     return render(request, "student_template/home.html")
@@ -16,13 +16,16 @@ def student_profile(request):
     user = CustomUser.objects.get(id=request.user.id)
     return render(request, "student_template/student_profile.html", {"user": user})
 
+def edit_student_profile(request):
+    user = CustomUser.objects.get(id=request.user.id)
+    return render(request, "student_template/edit_profile.html", {"user": user})
+
 def update_student_profile(request):
     if request.method != "POST":
         return HttpResponseRedirect(reverse("student_profile"))
     else:
         first_name = request.POST.get("first_name")
         last_name = request.POST.get("last_name")
-        username = request.POST.get("username")
         address = request.POST.get("address")
         if request.FILES.get('picture', False):
             picture = request.FILES['picture']
@@ -33,9 +36,9 @@ def update_student_profile(request):
             picture_url = None
         try:
             user = CustomUser.objects.get(id=request.user.id)
-            user.username = username
             user.first_name = first_name
             user.last_name = last_name
+            user.address = address
             user.save()
             student = Students.objects.get(student=request.user.id)
 
@@ -43,10 +46,10 @@ def update_student_profile(request):
                 student.display_image = picture_url
             student.address = address
             student.save()
-            messages.success(request, "Successfully Edited student profile")
+            messages.success(request, "Student profile updated successfully")
             return HttpResponseRedirect(reverse("student_profile"))
         except:
-            messages.error(request, "Failed to Edit student profile")
+            messages.error(request, "Failed to update Student profile")
             return HttpResponseRedirect(reverse("student_profile"))
 
 def student_feedback(request):
@@ -63,17 +66,17 @@ def save_feedback(request):
         try:
             feedback = Students_feedback(student_id=student_id, feedback_message=feedback_message, feedback_reply="")
             feedback.save()
-            messages.success(request, "Successfully  Send Feedback")
+            messages.success(request, "Feedback sent successfully")
             return HttpResponseRedirect(reverse("student_feedback"))
         except:
-            messages.error(request, "Failed to Sent Feedback")
+            messages.error(request, "Failed to send Feedback")
             return HttpResponseRedirect(reverse("student_feedback"))
 
 def student_registration(request):
     student = Students.objects.get(student=request.user.id)
     expiration_date = Expiration_date.objects.last()
-    staffs = CustomUser.objects.filter(user_type=2)
-    companies = CustomUser.objects.filter(user_type=3)
+    staffs = CustomUser.objects.filter(user_type=2).order_by("last_name", "first_name")
+    companies = CustomUser.objects.filter(user_type=3, company__in_whitelist=True).order_by("username")
     data = Students_registration.objects.filter(student_id=student)
     return render(request, "student_template/student_registration.html", {"data": data, "expiration_date": expiration_date, "staffs": staffs, "companies": companies})
 
@@ -111,10 +114,10 @@ def confirm_registration(request):
             student_id = Students.objects.get(student=request.user.id)
             registration = Students_registration(student_id=student_id, agreement=agreement_url, supervisor_id=supervisor, registration_status=0, beta_type=beta_type)
             registration.save()
-            messages.success(request, "Successfully Confirmed Registration")
+            messages.success(request, "Registration successfully confirmed")
             return HttpResponseRedirect(reverse("student_registration"))
         except:
-            messages.error(request, "Failed to Confirm Registration")
+            messages.error(request, "Failed to confirm Registration")
             return HttpResponseRedirect(reverse("student_registration"))
 
 def reports(request):
@@ -175,37 +178,108 @@ def submit_report(request):
         try:
             report_submit = Report_submitting(student_id=student_id, report_id=report, submission_status=1, references=reference)
             report_submit.save()
-            messages.success(request, "Successfully Submitted Report")
+            messages.success(request, "Report has been successfully submitted")
             return HttpResponseRedirect(reverse("report_detail", kwargs={"report_id": report_id}))
         except:
-            messages.error(request, "Failed to Submit Report")
+            messages.error(request, "Failed to submit Report")
             return HttpResponseRedirect(reverse("report_detail", kwargs={"report_id": report_id}))
 
 def grades_list(request):
     student = Students.objects.get(student=request.user.id)
+    coordinator = Admin.objects.last()
     try:
         registered = Students_registration.objects.get(student_id=student)
     except:
         registered = None
     if registered and registered.registration_status == 1:
         supervisor = CustomUser.objects.get(id=registered.supervisor_id.id)
-        reports = Report_submitting.objects.filter(student_id=student)
         grade = 0
         s_mark = 0
         f_mark = 0
-        for report in reports:
-            grade = grade + report.grade
-        grade = grade/15
-        grade = round(grade)
         try:
             grade_list = Grades_List.objects.get(student_id=student)
             s_mark = grade_list.supervisor_marks
             f_mark = grade_list.final_marks
+            grade = grade_list.report_marks
         except Grades_List.DoesNotExist:
             grade_list = None
+        grade = round(grade / 15)
         total = s_mark * 0.6 + grade * 0.15 + f_mark * 0.25
         total = round(total)
-        return render(request, "student_template/grades_list.html", {"s_mark": s_mark, "f_mark": f_mark, "grade": grade, "total": total, "supervisor": supervisor, "student": student})
+        return render(request, "student_template/grades_list.html", {"s_mark": s_mark, "f_mark": f_mark, "grade": grade, "total": total, "coordinator": coordinator, "supervisor": supervisor, "student": student})
     else:
         messages.error(request, "You have not registered, or Your request not yet approved(or rejected)")
         return HttpResponseRedirect(reverse("student_registration"))
+
+def posts(request):
+        post = Post.objects.all().order_by('-created_at')
+        comments = Comments.objects.all()
+        return render(request, "student_template/view_post.html", {"post": post, "comments": comments})
+
+def student_comment(request):
+    if request.method != "POST":
+        return HttpResponseRedirect(reverse("posts"))
+    else:
+        post_id = request.POST.get("post_id")
+        body = request.POST.get("comment")
+        post = Post.objects.get(id=post_id)
+        author = CustomUser.objects.get(id=request.user.id)
+        try:
+            comment = Comments(post=post, body=body, author=author)
+            comment.save()
+            return HttpResponseRedirect(reverse("posts"))
+        except:
+            messages.error(request, "Failed to Comment")
+            return HttpResponseRedirect(reverse("posts"))
+
+def delete_student_comment(request, comment_id, post_id):
+    try:
+        comment = Comments.objects.get(id=comment_id)
+        comment.delete()
+        return HttpResponseRedirect(reverse("posts"))
+    except:
+        messages.error(request, "Comment doesn't exist")
+        return HttpResponseRedirect(reverse("posts"))
+
+def vacancy(request):
+    vacancies = VacancyList.objects.all().order_by('-created_at')
+    student = Students.objects.get(student=request.user.id)
+    respond = Vacancy_respond.objects.filter(student_id=student)
+    respond1 = Vacancy_respond.objects.filter(student_id=student).values_list('vacancy_id', flat=True)
+    my_list = []
+    for r in respond1:
+        vacancy = VacancyList.objects.get(id=r)
+        my_list.append(vacancy)
+    return render(request, "student_template/vacancy.html", {"vacancies": vacancies, "respond": respond, "my_list": my_list})
+
+def respond(request):
+    if request.method != "POST":
+        return HttpResponseRedirect(reverse("vacancy"))
+    else:
+        vacancy_id = request.POST.get("vacancy_id")
+        vacancy = VacancyList.objects.get(id=vacancy_id)
+        student = Students.objects.get(student=request.user.id)
+        if request.FILES.get('file', False):
+            picture = request.FILES['file']
+            fs = FileSystemStorage()
+            filename = fs.save(picture.name, picture)
+            file_url = fs.url(filename)
+        else:
+            file_url = None
+        try:
+            vacancy_respond = Vacancy_respond(vacancy_id=vacancy, student_id=student, resume=file_url)
+            vacancy_respond.save()
+            return HttpResponseRedirect(reverse("vacancy"))
+        except:
+            messages.error(request, "Failed to Respond")
+            return HttpResponseRedirect(reverse("vacancy"))
+
+def cancel_respond(request, vacancy_id):
+    try:
+        student = Students.objects.get(student=request.user.id)
+        vacancy_respond = Vacancy_respond.objects.get(vacancy_id=vacancy_id, student_id=student)
+        vacancy_respond.delete()
+        return HttpResponseRedirect(reverse("respond"))
+    except:
+        messages.error(request, "Can not cancel")
+        return HttpResponseRedirect(reverse("respond"))

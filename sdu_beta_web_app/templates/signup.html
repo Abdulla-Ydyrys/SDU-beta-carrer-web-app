@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+     <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Sign up</title>
+</head>
+<body class="">
+  <div class="registration_page">
+    <div style="">
+      <div class="inner_registration_page">
+        {% if messages %}
+          {% for message in messages %}
+            {% if message.tags == 'error' %}
+        <div class="form-group alert alert-warning alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+           <strong>{{ message }}</strong></div>
+           {% endif %}
+        {% if message.tags == 'success' %}
+        <div class="form-group alert alert-success alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+           <strong>{{ message }}</strong></div>
+           {% endif %}
+          {% endfor %}
+        {% endif %}
+
+
+
+      <form action="/save_user" method="post" enctype="multipart/form-data">
+        
+        <h1 style="text-align: center; margin-bottom: 25px;">Sign up</h1>
+        {% csrf_token %}
+        <div class="form-group margin_rt_lf">
+          <select class="form-control" name="user_type" id="user_type"  onchange="var optionVal = $(this).find(':selected').val(); doSomething(optionVal)" required>
+            <option value="" disabled selected>Select your position</option>
+            <option>Student</option>
+            <option>Staff</option>
+            <option>Company</option>
+          </select>
+        </div>
+
+        <div class="form-group inline" style="margin-right: 5px;">
+          <input type="email" class="form-control"  placeholder="Enter email" name="email" required>
+        </div>
+        <div class="form-group inline">
+          <input type="password" class="form-control" placeholder="Enter password" name="password" required>
+        </div>
+         <div class="form-group inline" style="margin-right: 5px;">
+          <input type="text" class="form-control"  placeholder="Enter First Name" name="first_name" required>
+        </div>
+        <div class="form-group inline">
+          <input type="text" class="form-control"  placeholder="Enter Last Name" name="last_name" required>
+        </div>
+        <div id="s_user">
+        </div>
+        <div id="c_user">
+        </div>
+        <div class="form-group inline" style="margin-right: 5px;">
+          <input type="text" class="form-control"  placeholder="Enter Address" name="address">
+        </div>
+        <div class="form-group inline" id="gender">
+          <select class="form-control" name="gender">
+            <option value="" disabled selected>Your gender</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+          <div class="form-group picture margin_rt_lf">
+            <!-- <input type="file" class="form-control-file" name="picture"> -->
+            <input class="form-control-file" name="picture" id="actual-btn" type="file" hidden/>
+            <div class="choose_btn">
+              <!-- our custom upload button -->
+              <label for="actual-btn">Choose Picture</label>
+              <!-- name of file chosen -->
+              <span id="file-chosen">No Picture chosen</span>
+            </div>
+          </div>
+
+          <div class="form-group margin_rt_lf">
+            <button type="submit" class="btn btn-outline-info">Sign Up</button>
+          </div>
+          <div class="form-group margin_rt_lf" style="text-align: center;">
+            <a href="/" class="btn-outline-danger">Sign In instead</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="/static/js/main.js"></script>
+</body>
+
+{% block custom_js %}
+<script>
+  function doSomething(param) {
+    var var1 = param;
+    var var2 = "Student";
+    var var3 = "Staff";
+    var var4 = "Company";
+    if (var1 == var3) {
+    $( "#c_username" ).remove();
+    $( "#gender" ).show();
+    $( "#gender" ).removeClass("inline");
+    $( "#gender" ).addClass("margin_rt_lf");
+    $( "#email" ).hide();
+    $( "#sduemail" ).show();
+             document.querySelector('#s_user').insertAdjacentHTML(
+             'afterbegin',
+            `  <div class="form-group inline" style="margin-right:5px;" id="s_username">
+      <input type="text" class="form-control"  placeholder="Enter Username" name="s_username">
+    </div>`
+  )
+    }else if (var1 == var2 ){
+          $( "#s_username" ).remove();
+          $( "#c_username" ).remove();
+          $( "#gender" ).show();
+          $( "#gender" ).addClass("inline");
+          $( "#gender" ).removeClass("margin_rt_lf");
+    }else{
+        $( "#s_username" ).remove();
+        $( "#gender" ).hide();
+        $( "#gender" ).addClass("inline");
+        $( "#gender" ).removeClass("margin_rt_lf");
+
+    document.querySelector('#c_user').insertAdjacentHTML(
+             'afterbegin',
+            `  <div class="form-group inline" style="margin-right:5px;" id="c_username">
+      <input type="text" class="form-control"  placeholder="Enter Company Name" name="c_username">
+    </div>`
+  )
+    }
+}
+
+</script>
+{% endblock custom_js %}
+
+
+</body>
+</html>
+

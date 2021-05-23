@@ -1,7 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4e0f165d-f199-4a73-955e-172000861ef2" name="Default Changelist" comment="" />
+    <list default="true" id="4e0f165d-f199-4a73-955e-172000861ef2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sdu_beta_web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sdu_beta_web.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/AdminViews.py" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/AdminViews.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/CompanyViews.py" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/CompanyViews.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/LoginCheckMiddleWare.py" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/LoginCheckMiddleWare.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/StaffViews.py" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/StaffViews.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/StudentViews.py" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/StudentViews.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/filters.py" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/filters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/add_company.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/add_company.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/add_report.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/add_report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/add_staff.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/add_staff.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/add_student.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/add_student.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/admin_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/admin_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/edit_company.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/edit_company.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/edit_report.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/edit_report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/edit_staff.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/edit_staff.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/edit_student.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/edit_student.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/feedback_messages.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/grades.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/grades.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/grades_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/grades_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/manage_company.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/manage_company.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/manage_registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/manage_registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/manage_report.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/manage_report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/manage_staff.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/manage_staff.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/manage_student.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/manage_student.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/submit_report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/view_report.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template/view_report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/company_template/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/company_template/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/company_template/company_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/company_template/company_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/company_template/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/company_template/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/company_template/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/company_template/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/company_template/my_interns.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/company_template/my_interns.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/company_template/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/company_template/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/login_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/login_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/registration/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/registration/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/registration/password_reset_complete.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/registration/password_reset_complete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/registration/password_reset_confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/registration/password_reset_confirm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/registration/password_reset_done.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/registration/password_reset_done.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/registration/password_reset_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/registration/password_reset_email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/registration/password_reset_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/registration/password_reset_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/staff_template/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/staff_template/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/staff_template/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/staff_template/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/staff_template/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/staff_template/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/staff_template/my_students.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/staff_template/my_students.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/staff_template/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/staff_template/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/staff_template/staff_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/staff_template/staff_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/grades_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/grades_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/report_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/report_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/reports.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/student_feedback.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/student_feedback.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/student_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/student_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/student_registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/templates/student_template/student_registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdu_beta_web_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sdu_beta_web_app/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/pyvenv.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,10 +81,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -33,13 +107,18 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/sdu_beta_web_app/templates/admin_template" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Администратор.DESKTOP-CQ7H428\Documents\sdu_beta_web\media" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Администратор.DESKTOP-CQ7H428\Documents\sdu_beta_web\sdu_beta_web_app\templates\admin_template" />
       <recent name="C:\Users\Администратор.DESKTOP-CQ7H428\Documents\sdu_beta_web\sdu_beta_web_app\templates\student_template" />
@@ -47,9 +126,18 @@
       <recent name="C:\Users\Администратор.DESKTOP-CQ7H428\Documents\sdu_beta_web\sdu_beta_web_app\templates\staff_template" />
       <recent name="C:\Users\Администратор.DESKTOP-CQ7H428\Documents\sdu_beta_web\sdu_beta_web_app\templates\registration_template" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Администратор.DESKTOP-CQ7H428\Documents\sdu_beta_web\media" />
-    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="manage" type="PythonConfigurationType" factoryName="Python">
@@ -59,9 +147,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Администратор.DESKTOP-CQ7H428\Documents\sdu_beta_web\venv\Scripts\python.exe" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
@@ -74,7 +162,7 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -87,5 +175,18 @@
       <updated>1617507854901</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

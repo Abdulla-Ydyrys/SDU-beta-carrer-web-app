@@ -41,18 +41,15 @@ class Company(models.Model):
     display_image = models.FileField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
+    in_whitelist = models.BooleanField(default=False)
     objects = models.Manager()
 
-
-class Vacancy(models.Model):
+class VacancyList(models.Model):
     id = models.AutoField(primary_key=True)
     vacancy_name = models.CharField(max_length=255)
-    staff_id = models.ForeignKey(Staffs, on_delete=models.CASCADE)
-    company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
-    position = models.TextField()
+    supervisor = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     requirements = models.TextField()
-    amount = models.TextField()
-    action = models.BooleanField(default=False)
+    amount = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
@@ -63,7 +60,6 @@ class Students(models.Model):
     gender = models.CharField(max_length=255)
     display_image = models.FileField()
     address = models.TextField()
-    vacancy_id = models.ForeignKey(Vacancy, on_delete=models.DO_NOTHING, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
@@ -71,10 +67,23 @@ class Students(models.Model):
     def __str__(self):
         return '%s %s' % (self.student.first_name, self.student.last_name)
 
+class Vacancy_respond(models.Model):
+    VAC_STATUS = (
+        (0, 'Pending'),
+        (1, 'Approved'),
+        (2, 'Rejected'),
+    )
+    id = models.AutoField(primary_key=True)
+    vacancy_status = models.IntegerField(default=0, choices=VAC_STATUS)
+    student_id = models.ForeignKey(Students, on_delete=models.DO_NOTHING)
+    resume = models.FileField()
+    vacancy_id = models.ForeignKey(VacancyList, on_delete=models.DO_NOTHING)
+
 class Grades_List(models.Model):
     id = models.AutoField(primary_key=True)
     student_id = models.ForeignKey(Students, on_delete=models.CASCADE)
     final_marks = models.IntegerField(default=0)
+    report_marks = models.IntegerField(default=0)
     supervisor_marks = models.IntegerField(default=0)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now_add=True)
@@ -92,7 +101,6 @@ class Students_registration(models.Model):
         (1, 'Approved'),
         (2, 'Rejected'),
     )
-
     id = models.AutoField(primary_key=True)
     student_id = models.ForeignKey(Students, on_delete=models.CASCADE)
     supervisor_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -118,26 +126,20 @@ class Students_feedback(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
 
-class Students_notification(models.Model):
-    id = models.AutoField(primary_key=True)
-    student_id = models.ForeignKey(Students, on_delete=models.CASCADE)
-    message = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
-    objects = models.Manager()
-
-class Staff_notification(models.Model):
+class Staff_feedback(models.Model):
     id = models.AutoField(primary_key=True)
     staff_id = models.ForeignKey(Staffs, on_delete=models.CASCADE)
-    message = models.TextField()
+    feedback_message = models.TextField()
+    feedback_reply = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
 
-class Company_notification(models.Model):
+class Company_feedback(models.Model):
     id = models.AutoField(primary_key=True)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
-    message = models.TextField()
+    feedback_message = models.TextField()
+    feedback_reply = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
@@ -178,6 +180,23 @@ class Policy(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
 
+class Post(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=255)
+    body = models.TextField()
+    author = models.ForeignKey(Admin, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+    objects = models.Manager()
+
+class Comments(models.Model):
+    id = models.AutoField(primary_key=True)
+    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
+    body = models.TextField()
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+    objects = models.Manager()
 
 @receiver(post_save, sender=CustomUser)
 def create_user_profile(sender, instance, created, **kwargs):

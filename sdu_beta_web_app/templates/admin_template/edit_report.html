@@ -4,26 +4,28 @@
 
 
 
-<h1>Edit Report | {{ report.report_name }}</h1>
+<div class="d-flex justify-content-between align-items-start mb-4">
+    <h3>Edit Report | {{ report.report_name }}</h3>
+    <a href="/manage_report" class="btn btn-outline-primary">Back</a>
+</div>
   <form action="/update_report" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-     <div class="form-group">
+     <div class="form-group flex-column align-items-start">
       <label >Report Name</label>
       <input type="text" class="form-control"  placeholder="Enter report name" name="report_name" value="{{ report.report_name }}">
       <input type="hidden" class="form-control"  name="report_id" value="{{ id }}">
     </div>
-      <div class="form-group ">
+      <div class="form-group flex-column align-items-start">
       <label>Report Detail</label>
        <textarea class="form-control" rows="7" name="report_detail">{{ report.report_detail }}</textarea>
     </div>
-    <div class="form-group col-4">
+    <div class="form-group flex-column align-items-start col-4 p-0">
       <label >Due Date</label>
       <input type="datetime-local" class="form-control" name="due_date" value="{{report.due_date|date:'Y-m-d\TH:i'}}">
     </div>
 
-       <div class="form-group">
-        <button type="submit" class="btn btn-outline-primary">Edit report</button>
-        <a href="/manage_report" class="btn btn-outline-danger">Сancel</a>
+       <div class="form-group justify-content-end">
+        <button type="submit" class="btn btn-outline-primary">Save</button>
        </div>
 
        {% if messages %}

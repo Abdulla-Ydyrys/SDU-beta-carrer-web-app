@@ -1,0 +1,58 @@
+{% extends 'company_template/base.html' %}
+
+{% block main_content %}
+
+<h3 class="page_title">Company Feedback</h3>
+    {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'error' %}
+      <div class="form-group alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+      {% if message.tags == 'success' %}
+      <div class="form-group alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+
+        {% endfor %}
+
+
+      {% endif %}
+  <form action="/save_company_feedback" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+    <div class="form-group" style="display: block;">
+      <label >Feedback Message:</label>
+       <textarea class="form-control" rows="5" name="feedback" required></textarea>
+    </div>
+
+
+       <div class="form-group" style="float: right;">
+    <button type="submit" class="btn btn-outline-primary">Submit</button>
+       </div>
+
+
+
+  </form>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Feedback Message</th>
+        <th>Feedback Reply</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for feedback in feedbacks %}
+      <tr>
+        <td>{{ feedback.feedback_message }}</td>
+        <td>{{ feedback.feedback_reply }}</td>
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+
+
+
+{% endblock main_content %}

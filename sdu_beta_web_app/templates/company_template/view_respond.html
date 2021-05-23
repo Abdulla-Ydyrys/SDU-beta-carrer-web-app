@@ -1,0 +1,78 @@
+{% extends 'company_template/base.html' %}
+
+{% block main_content %}
+
+<h3 class="page_title">View</h3>
+<div class="form-group" style="float: right;">
+  <a href="{% url 'vacancy_lists' %}" class="btn btn-outline-primary">Back</a>
+</div>  
+
+
+ <table class="table table-hover">
+     {% if messages %}
+        {% for message in messages %}
+      {% if message.tags == 'success' %}
+      <div class="form-group alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+       {% if message.tags == 'error' %}
+      <div class="form-group alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+        {% endfor %}
+      {% endif %}
+    <thead>
+      <tr>
+        <th>Student name</th>
+        <th>Email</th>
+        <th>Resume</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+     {% for respond in respond %}
+      <tr>
+        <td>{{ respond.student_id }}</td>
+        <td>{{ respond.student_id.student.email }}</td>
+        <td><a href="{{ respond.resume }}" download>Download</a></td>
+        <td>
+          {% if respond.vacancy_status == 0 %}         
+          Pending
+          {% elif respond.vacancy_status == 1  %}
+          Approved
+          {% elif respond.vacancy_status == 2  %}
+          Rejected
+          {% endif %}
+        </td>
+        <td>
+            {% if vacancy.amount != 0 %}
+                      {% if respond.vacancy_status == 0  %}
+                            <a href="{% url 'approved' student_id=respond.student_id.id vacancy_id=id %}" class="btn btn-outline-primary">Approve</a>
+           <a href="{% url 'rejected' student_id=respond.student_id.id vacancy_id=id %}" class="btn btn-outline-danger">Reject</a>
+                                        {% elif respond.vacancy_status == 1  %}
+                 <a href="{% url 'canceled' student_id=respond.student_id.id vacancy_id=id %}" class="btn btn-outline-warning">Cancel</a>
+                                        {% elif respond.vacancy_status == 2  %}
+             <a href="{% url 'canceled' student_id=respond.student_id.id vacancy_id=id %}" class="btn btn-outline-warning">Cancel</a>
+                                        {% endif %}
+
+            {% else %}
+                         {% if respond.vacancy_status == 0  %}
+                                       <span class="alert alert-warning">Pending</span>
+                         {% elif respond.vacancy_status == 1  %}
+                                         <span class="alert alert-success">Approved</span>
+                                      {% elif respond.vacancy_status == 2  %}
+                                           <span class="alert alert-danger">Rejected</span>
+                                       {% endif %}
+            {% endif %}
+             </td> </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+
+
+
+
+{% endblock %}

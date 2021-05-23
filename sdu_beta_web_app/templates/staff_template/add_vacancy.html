@@ -1,0 +1,47 @@
+{% extends 'staff_template/base.html' %}
+
+{% block main_content %}
+
+
+<div class="teacher_vacancy_list_page">
+    <div class="p-2 teacher_vacancy_list_inner">
+      <h3 class="page_title">Add Vacancy</h3>
+      <a href="{% url 'vacancy_list' %}" class="btn btn-outline-primary" style="position: absolute;right: 30px;top: 50px;">Back</a>
+
+      {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'error' %}
+      <div class="form-group alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+      {% if message.tags == 'success' %}
+      <div class="form-group alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+        {% endfor %}
+      {% endif %}
+
+
+  <form action="/save_vacancy" method="post" enctype="multipart/form-data" style="margin-top: 40px;">
+      {% csrf_token %}
+    <div class="form-group">
+      <input type="text" class="form-control"  placeholder="Enter vacancy name" name="vacancy_name" required>
+    </div>
+      <div class="form-group ">
+       <textarea class="form-control" rows="6" placeholder="Vacancy Requirements" name="requirements" required></textarea>
+    </div>
+    <div class="form-group">
+      <label>Amount of Students</label>
+      <input type="number" class="form-control col-1"  placeholder="Enter the amount of students" name="amount" required>
+    </div>
+       <div class="form-group" style="float: right;">
+    <button type="submit" class="btn btn-outline-primary">Submit</button>
+       </div>
+  </form>
+</div>
+</div>
+
+
+{% endblock %}

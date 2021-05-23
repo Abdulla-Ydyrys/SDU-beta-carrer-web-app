@@ -1,32 +1,173 @@
 
-
-<div class="col-2">
+<div class="sitebar">
 <div class="list-group">
   {% url 'admin_profile' as admin_profile %}
-  <a href="{{ admin_profile }}" class="list-group-item list-group-item-action {% if request.path == admin_profile %} active {% endif %}"><img src="{{ user.admin.display_image }}" width="80" >{{ user.username }}</a>
-  {% url 'add_staff' as add_staff %}
-  {% url 'manage_staff' as manage_staff %}
-  {% url 'edit_staff' staff_id=id as edit_staff %}
-  <a href="{{ manage_staff }}" class="list-group-item list-group-item-action {% if request.path == manage_staff %} active {% endif %} {% if request.path == edit_staff %} active {% endif %} {% if request.path == add_staff %} active {% endif %}  ">Manage Staffs</a>
-  {% url 'add_company' as add_company %}
-  {% url 'manage_company' as manage_company  %}
-  {% url 'edit_company' company_id=id as edit_company %}
-  <a href="{{ manage_company }}" class="list-group-item list-group-item-action {% if request.path == manage_company %} active {% endif %} {% if request.path == edit_company %} active {% endif %} {% if request.path == add_company %} active {% endif %}">Manage Companies</a>
-  {% url 'add_student' as add_student %}
-  {% url 'manage_student' as manage_student %}
-  {% url 'edit_student' student_id=id as edit_student %}
-  <a href="{{ manage_student }}" class="list-group-item list-group-item-action {% if request.path == manage_student %} active {% endif %} {% if request.path == edit_student %} active {% endif %} {% if request.path == add_student %} active {% endif %}">Manage Students</a>
-   {% url 'add_report' as add_report %}
-   {% url 'manage_report' as manage_report %}
-    {% url 'edit_report' report_id=id as edit_report %}
-  <a href="{{ manage_report }}" class="list-group-item list-group-item-action {% if request.path == manage_report %} active {% endif %} {% if request.path == edit_report %} active {% endif %} {% if request.path == add_report %} active {% endif %}">Manage reports</a>
-  {% url 'manage_registration' as manage_registration %}
-  <a href="{{ manage_registration }}" class="list-group-item list-group-item-action {% if request.path == manage_registration %} active {% endif %}">Manage Registration</a>
-  {% url 'grades' as grades %}
-  {% url 'view_grade' student_id=id as view_grade %}
-  <a href="{{ grades }}" class="list-group-item list-group-item-action {% if request.path == grades %} active {% endif %} {% if request.path == view_grade %} active {% endif %}">Grades List</a>
-  {% url 'feedback_messages' as feedback_messages %}
-  <a href="{{ feedback_messages }}" class="list-group-item list-group-item-action {% if request.path == feedback_messages %} active {% endif %}">Feedback Reply</a>
+  <div class="student_profile">
+    <div class="student_profile_inner">
+      <a href="{{ admin_profile }}" class=" {% if request.path == student_profile %} active {% endif %}">
+        <div class="profile_image">
+          <img src="{{ user.admin.display_image }}" width="80" >
+        </div>
+      </a>
+      <div class="profile_name">
+        <h6>{{ user.first_name }} {{ user.last_name }}</h6>
+        <p>Admin</p>
+      </div>
+    </div>
+  </div>
+  <hr class="divider">
+  <div class="sidebar_menu">
+    <ul class="list_root">
+      <li class="list_item">
+        {% url 'admin_home' as admin_home %}
+        <a href="{{ admin_home }}" class="list-group-item list-group-item-action {% if request.path == admin_home %} active {% endif %}">
+          <span class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon">
+            <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+            </svg>
+          </span>
+          Home
+        </a>
+      </li>
+      <li class="list_item">
+        {% url 'manage_staff' as manage_staff %}
+        {% url 'add_staff' as add_staff %}
+        {% url 'edit_staff' staff_id=id as edit_staff %}
+        <a href="{{ manage_staff }}" class="list-group-item list-group-item-action {% if request.path == manage_staff %} active {% endif %} {% if request.path == edit_staff %} active {% endif %} {% if request.path == add_staff %} active {% endif %}">
+        <span class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon">
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           width="80.13px" height="80.13px" viewBox="0 0 80.13 80.13" style="enable-background:new 0 0 80.13 80.13;" xml:space="preserve" fill="currentColor">
+            <g>
+                <path d="M48.355,17.922c3.705,2.323,6.303,6.254,6.776,10.817c1.511,0.706,3.188,1.112,4.966,1.112
+                    c6.491,0,11.752-5.261,11.752-11.751c0-6.491-5.261-11.752-11.752-11.752C53.668,6.35,48.453,11.517,48.355,17.922z M40.656,41.984
+                    c6.491,0,11.752-5.262,11.752-11.752s-5.262-11.751-11.752-11.751c-6.49,0-11.754,5.262-11.754,11.752S34.166,41.984,40.656,41.984
+                    z M45.641,42.785h-9.972c-8.297,0-15.047,6.751-15.047,15.048v12.195l0.031,0.191l0.84,0.263
+                    c7.918,2.474,14.797,3.299,20.459,3.299c11.059,0,17.469-3.153,17.864-3.354l0.785-0.397h0.084V57.833
+                    C60.688,49.536,53.938,42.785,45.641,42.785z M65.084,30.653h-9.895c-0.107,3.959-1.797,7.524-4.47,10.088
+                    c7.375,2.193,12.771,9.032,12.771,17.11v3.758c9.77-0.358,15.4-3.127,15.771-3.313l0.785-0.398h0.084V45.699
+                    C80.13,37.403,73.38,30.653,65.084,30.653z M20.035,29.853c2.299,0,4.438-0.671,6.25-1.814c0.576-3.757,2.59-7.04,5.467-9.276
+                    c0.012-0.22,0.033-0.438,0.033-0.66c0-6.491-5.262-11.752-11.75-11.752c-6.492,0-11.752,5.261-11.752,11.752
+                    C8.283,24.591,13.543,29.853,20.035,29.853z M30.589,40.741c-2.66-2.551-4.344-6.097-4.467-10.032
+                    c-0.367-0.027-0.73-0.056-1.104-0.056h-9.971C6.75,30.653,0,37.403,0,45.699v12.197l0.031,0.188l0.84,0.265
+                    c6.352,1.983,12.021,2.897,16.945,3.185v-3.683C17.818,49.773,23.212,42.936,30.589,40.741z"/>
+            </g>
+          </svg>
+        </span>
+          Manage staff
+        </a>
+      </li>
+      <li class="list_item">
+        {% url 'manage_company' as manage_company %}
+        {% url 'add_company' as add_company %}
+        {% url 'edit_company' company_id=id as edit_company %}
+        <a href="{{ manage_company }}" class="list-group-item list-group-item-action {% if request.path == manage_company %} active {% endif %} {% if request.path == edit_company %} active {% endif %} {% if request.path == add_company %} active {% endif %}">
+          <span class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon">
+
+          <svg id="bold" enable-background="new 0 0 24 24" height="512" viewBox="0 0 24 24" width="512" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="m13.03 1.87-10.99-1.67c-.51-.08-1.03.06-1.42.39-.39.34-.62.83-.62 1.34v21.07c0 .55.45 1 1 1h3.25v-5.25c0-.97.78-1.75 1.75-1.75h2.5c.97 0 1.75.78 1.75 1.75v5.25h4.25v-20.4c0-.86-.62-1.59-1.47-1.73zm-7.53 12.88h-1.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h1.5c.414 0 .75.336.75.75s-.336.75-.75.75zm0-3h-1.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h1.5c.414 0 .75.336.75.75s-.336.75-.75.75zm0-3h-1.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h1.5c.414 0 .75.336.75.75s-.336.75-.75.75zm0-3h-1.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h1.5c.414 0 .75.336.75.75s-.336.75-.75.75zm5 9h-1.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h1.5c.414 0 .75.336.75.75s-.336.75-.75.75zm0-3h-1.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h1.5c.414 0 .75.336.75.75s-.336.75-.75.75zm0-3h-1.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h1.5c.414 0 .75.336.75.75s-.336.75-.75.75zm0-3h-1.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h1.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/><path d="m22.62 10.842-7.12-1.491v14.649h6.75c.965 0 1.75-.785 1.75-1.75v-9.698c0-.826-.563-1.529-1.38-1.71zm-2.37 10.158h-1.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h1.5c.414 0 .75.336.75.75s-.336.75-.75.75zm0-3h-1.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h1.5c.414 0 .75.336.75.75s-.336.75-.75.75zm0-3h-1.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h1.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></svg>
+          </span>
+          Manage company
+        </a>
+      </li>
+      <li class="list_item">
+        {% url 'manage_student' as manage_student %}
+        {% url 'add_student' as add_student %}
+        {% url 'edit_student' student_id=id as edit_student %}
+        <a href="{{ manage_student }}" class="list-group-item list-group-item-action {% if request.path == manage_student %} active {% endif %} {% if request.path == edit_student %} active {% endif %} {% if request.path == add_student %} active {% endif %}">
+          <span class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon">
+            <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="8.5" cy="7" r="4"></circle>
+              <line x1="20" y1="8" x2="20" y2="14"></line>
+              <line x1="23" y1="11" x2="17" y2="11"></line>
+            </svg>
+          </span>
+          Manage student
+        </a>
+      </li>
+      <li class="list_item">
+        {% url 'manage_report' as manage_report %}
+        {% url 'add_report' as add_report %}
+        {% url 'view_report' report_id=id as view_report %}
+        {% url 'edit_report' report_id=id as edit_report %}
+        <a href="{{ manage_report }}" class="list-group-item list-group-item-action {% if request.path == manage_report %} active {% endif %} {% if request.path == view_report %} active {% endif %} {% if request.path == edit_report %} active {% endif %} {% if request.path == add_report %} active {% endif %}">
+          <span class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon">
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" fill="currentColor">
+            <g><g><polygon points="320,0 320,128 448,128 		"/></g></g><g>
+                <g>
+                  <path d="M320,160c-17.632,0-32-14.368-32-32V0H96C78.368,0,64,14.368,64,32v448c0,17.664,14.368,32,32,32h320
+                        c17.664,0,32-14.336,32-32V160H320z M192,448h-64v-96h64V448z M288,448h-64V288h64V448z M384,448h-64V224h64V448z"/>
+                </g>
+              </g>
+            </svg>
+          </span>
+          Manage report
+        </a>
+      </li>
+      <li class="list_item">
+        {% url 'manage_registration' as manage_registration %}
+        <a href="{{ manage_registration }}" class="list-group-item list-group-item-action {% if request.path == manage_registration %} active {% endif %}">
+            <span class="Mui  Button-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon">
+          <svg height="512pt" viewBox="0 -20 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="m119 161c-22.054688 0-40 17.945312-40 40v151c0 22.054688 17.945312 40 40 40h76c22.054688 0 40-17.945312 40-40v-151c0-22.054688-17.945312-40-40-40zm76 191h-76v-151h76l.023438 151s-.003907 0-.023438 0zm236-75c0 11.046875-8.953125 20-20 20h-116c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h116c11.046875 0 20 8.953125 20 20zm0 76c0 11.046875-8.953125 20-20 20h-116c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h116c11.046875 0 20 8.953125 20 20zm0-152c0 11.046875-8.953125 20-20 20h-116c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h116c11.046875 0 20 8.953125 20 20zm21-201h-392c-33.085938 0-60 26.914062-60 60v332c0 44.113281 35.886719 80 80 80h352c44.113281 0 80-35.886719 80-80 0-11.046875-8.953125-20-20-20s-20 8.953125-20 20c0 22.054688-17.945312 40-40 40h-352c-22.054688 0-40-17.945312-40-40v-271h432v171c0 11.046875 8.953125 20 20 20s20-8.953125 20-20v-232c0-33.085938-26.914062-60-60-60zm-81 40c11.027344 0 20 8.972656 20 20s-8.972656 20-20 20-20-8.972656-20-20 8.972656-20 20-20zm100 20c0 11.027344-8.972656 20-20 20s-20-8.972656-20-20 8.972656-20 20-20 20 8.972656 20 20zm-431 0c0-11.027344 8.972656-20 20-20h254.441406c-2.222656 6.261719-3.441406 12.988281-3.441406 20 0 7.386719 1.347656 14.460938 3.800781 21h-274.800781zm0 0"/></svg>
+          </span>
+          Manage registration
+        </a>
+      </li>
+      <li class="list_item">
+        {% url 'grades' as grades %}
+        {% url 'view_grade' student_id=id as view_grade %}
+        <a href="{{ grades }}" class="list-group-item list-group-item-action {% if request.path == grades %} active {% endif %} {% if request.path == view_grade %} active {% endif %}">
+          <span class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 11 12 14 22 4"></polyline>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+          </span>
+          Grades list
+        </a>
+      </li>
+
+      <li class="list_item">
+        {% url 'view_post' post_id=id as view_post %}
+        {% url 'add_post' as add_post %}
+         {% url 'manage_post' as manage_post %}
+        {% url 'edit_post' post_id=id as edit_post %}
+
+      <a href="{{ manage_post }}" class="list-group-item list-group-item-action {% if request.path == manage_post %} active {% endif %} {% if request.path == edit_post %} active {% endif %} {% if request.path == view_post %} active {% endif %}  {% if request.path == add_post %} active {% endif %}">
+        <span class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon">
+        <svg id="Capa_1" fill="currentColor" enable-background="new 0 0 508 508" height="512" viewBox="0 0 508 508" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m470.958 169.333h-433.916c-20.32 0-37.042 16.722-37.042 37.042v264.583c0 20.32 16.722 37.042 37.042 37.042h433.917c20.32 0 37.042-16.722 37.042-37.042v-264.583c-.001-20.32-16.723-37.042-37.043-37.042zm-26.458 100.542v137.583c0 20.32-16.51 37.042-37.042 37.042h-116.416c-20.532 0-37.042-16.722-37.042-37.042v-137.583c0-20.32 16.51-37.042 37.042-37.042h116.417c20.531 0 37.041 16.722 37.041 37.042zm-248.708 79.375h-116.417c-8.678 0-15.875-7.197-15.875-15.875s7.197-15.875 15.875-15.875h116.417c8.678 0 15.875 7.197 15.875 15.875s-7.197 15.875-15.875 15.875zm15.875 47.625c0 8.678-7.197 15.875-15.875 15.875h-116.417c-8.678 0-15.875-7.197-15.875-15.875s7.197-15.875 15.875-15.875h116.417c8.678 0 15.875 7.197 15.875 15.875zm-15.875-111.125h-116.417c-8.678 0-15.875-7.197-15.875-15.875s7.197-15.875 15.875-15.875h116.417c8.678 0 15.875 7.197 15.875 15.875s-7.197 15.875-15.875 15.875z"/><path d="m470.958 0h-433.916c-20.426 0-37.042 16.616-37.042 37.042v52.917c0 20.425 16.616 37.041 37.042 37.041h433.917c20.425 0 37.041-16.616 37.041-37.042v-52.916c0-20.426-16.616-37.042-37.042-37.042z"/></g></svg>
+        </span>
+        Posts
+      </a>
+      </li>
+      <li class="list_item">
+        {% url 'student_messages' as student_messages %}
+        {% url 'staff_messages' as staff_messages %}
+        {% url 'company_messages' as company_messages %}
+        <a href="{{ student_messages }}" class="list-group-item list-group-item-action {% if request.path == student_messages %} active {% endif %} {% if request.path == report_detail %} active {% endif %}">
+          <span class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon">
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" fill="currentColor"><g><g><g><path d="M462.75,210.479c-3.979-1.656-8.583-0.74-11.625,2.313l-65.854,65.833c-4.479,4.49-10.146,7.51-16.333,8.75
+				l-53.333,10.667c-10.625,2.146-21.375-1.229-28.896-8.74c-7.583-7.594-10.854-18.406-8.75-28.906l9.408-47.063H117.333
+				c-5.896,0-10.667-4.771-10.667-10.667c0-5.896,4.771-10.667,10.667-10.667h179.061c0.371-0.411,0.587-0.928,0.98-1.323
+				l41.35-41.344H117.333c-5.896,0-10.667-4.771-10.667-10.667c0-5.896,4.771-10.667,10.667-10.667H352
+				c2.271,0,4.259,0.866,5.988,2.074l69.22-69.21c5.833-5.844,12.896-10.438,21-13.667c3.688-1.469,6.25-4.875,6.646-8.823
+				c0.417-3.958-1.417-7.802-4.729-9.99c-7.021-4.615-15.125-7.052-23.458-7.052h-384C19.146,21.333,0,40.469,0,64v416
+				c0,4.313,2.604,8.208,6.583,9.854c1.313,0.552,2.708,0.813,4.083,0.813c2.771,0,5.5-1.083,7.542-3.125L121.75,384h304.917
+				c23.521,0,42.667-19.135,42.667-42.667v-121C469.333,216.021,466.729,212.125,462.75,210.479z M245.333,277.333h-128
+				c-5.896,0-10.667-4.771-10.667-10.667c0-5.896,4.771-10.667,10.667-10.667h128c5.896,0,10.667,4.771,10.667,10.667
+				C256,272.563,251.229,277.333,245.333,277.333z"/>
+			<path d="M471.167,64c-10.771,0-21.292,4.365-28.875,11.958L312.458,205.771c-1.5,1.49-2.5,3.385-2.917,5.448l-10.667,53.354
+				c-0.708,3.5,0.396,7.115,2.917,9.635c2.021,2.021,4.75,3.125,7.542,3.125c0.688,0,1.396-0.073,2.083-0.208l53.313-10.667
+				c2.083-0.417,3.979-1.427,5.458-2.917l129.854-129.833c0,0,0,0,0-0.01c7.604-7.604,11.958-18.125,11.958-28.865
+				C512,82.313,493.688,64,471.167,64z M454.249,149.332l-27.587-27.587l15.083-15.083l27.589,27.589L454.249,149.332z"/></g></g></g>
+          </svg>
+          </span>
+          Feedback reply
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+  </div>
 
 
 </div>

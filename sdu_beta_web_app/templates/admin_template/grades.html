@@ -2,31 +2,34 @@
 
 {% block main_content %}
 
-<h1>Students Grades List</h1>
+
+<div class="d-flex justify-content-between align-items-center">
+    <h3 class="mb-4">Students Grades List</h3>
+    <div>
+        <a href="{% url 'export-excel' %}" class="btn btn-outline-primary" style="margin-right: 3px;">Export Excel</a>
+    </div>
+</div>
+
 
 <form method="get">
-    <div class="container">
-    <div class="row ">
-
-    <div class="form-group">
-      <label for="id_student_id">Search by student ID</label>
-        <input type="text" class="form-control" name="student_id" id="id_student_id">
-    </div>
-         <div class="form-group offset-md-1">
-      <label for="id_beta_type">Beta type:</label>
-        <select class="form-control" name="beta_type" id="id_beta_type">
-        <option value="">---------</option>
-        <option value="SDU Beta">SDU Beta</option>
-        <option value="Academic Beta">Academic Beta</option>
-        <option value="Industrial Beta">Industrial Beta</option>
-    </select>
-     </div>
-
-        <div class="offset-md-1" style="padding-top:30px;">
-    <button type="submit" class="btn btn-outline-info">Search</button>
-              </div>
-         </div>
+    <div class="d-flex">
+        <div class="form-group flex-column align-items-start">
+          <label for="id_student_id">Search by student ID</label>
+            <input type="text" class="form-control" name="student_id" id="id_student_id">
         </div>
+        <div class="form-group align-items-start flex-column mx-3">
+          <label for="id_beta_type">Beta type:</label>
+            <select class="form-control" name="beta_type" id="id_beta_type">
+                <option value="">---------</option>
+                <option value="SDU Beta">SDU Beta</option>
+                <option value="Academic Beta">Academic Beta</option>
+                <option value="Industrial Beta">Industrial Beta</option>
+            </select>
+         </div>
+        <div style="padding-top:32px;">
+            <button type="submit" class="btn btn-outline-primary">Search</button>
+        </div>
+    </div>
 </form>
 
       {% if messages %}
@@ -45,13 +48,13 @@
       {% endif %}
 
 
- <table class="table table-hover">
+ <table class="table">
 
     <thead>
       <tr>
         <th hidden>ID</th>
-        <th>Name</th>
-          <th>SDU ID</th>
+        <th>Student</th>
+          <th>ID</th>
         <th>Supervisor</th>
         <th>Beta type</th>
         <th>Grades</th>
@@ -61,11 +64,14 @@
      {% for registration in registrations %}
       <tr>
           <td hidden>{{ registration.id }}</td>
-        <td>{{ registration.student_id.student.first_name }} {{ registration.student_id.student.last_name }}</td>
+        <td>{{ registration.student_id.student.last_name }} {{ registration.student_id.student.first_name }} </td>
           <td>{{ registration.student_id.student.username }}</td>
-        <td>{{ registration.supervisor_id.username }}</td>
-        <td>{{ registration.beta_type }}</td>
-        <td><a href="{% url 'view_grade' student_id=registration.student_id.student.id %}" class="btn btn-outline-success">View</a>
+        {% if registration.supervisor_id.user_type == "2" %}
+              <td>{{ registration.supervisor_id.last_name }} {{ registration.supervisor_id.first_name }}</td>
+           {% elif registration.supervisor_id.user_type == "3" %}
+              <td>{{ registration.supervisor_id.username }} / {{ registration.supervisor_id.last_name }} {{ registration.supervisor_id.first_name }}</td>
+              {% endif %}  <td>{{ registration.beta_type }}</td>
+        <td><a href="{% url 'view_grade' student_id=registration.student_id.student.id %}" class="btn btn-sm btn-outline-primary">View</a>
            </td>
       </tr>
 
@@ -74,6 +80,23 @@
   </table>
 
 
-
+<div class="d-flex justify-content-center">
+{% if registrations.has_previous %}
+        <a href="{% url 'grades' %}?page=1" class="btn btn-outline-primary">First</a>
+        <a href="{% url 'grades' %}?page={{ registrations.previous_page_number }}" class="btn btn-outline-primary">Previous Page</a>
+{% endif %}
+{% if registrations.paginator.page_range|length > 1%}
+{% for num in registrations.paginator.page_range %}
+    {% if registrations.number == num %}
+         <a href="{% url 'grades' %}?page={{ num }}" class="btn btn-primary">{{ num }}</a>
+    {% elif num > registrations.number|add:'-3' and num < registrations.number|add:'3' %}
+        <a href="{% url 'grades' %}?page={{num}}" class="btn btn-outline-primary">{{num}}</a>
+    {% endif %}
+{% endfor %}
+  {% endif %}
+{% if registrations.has_next %}
+         <a href="{% url 'grades' %}?page={{ registrations.next_page_number }}" class="btn btn-outline-primary">Next Page</a>
+         <a href="{% url 'grades' %}?page={{ registrations.paginator.num_pages }}" class="btn btn-outline-primary">Last</a>
+{% endif %}
+</div>
 {% endblock %}
-

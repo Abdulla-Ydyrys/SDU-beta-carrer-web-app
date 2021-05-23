@@ -1,0 +1,111 @@
+{% extends 'student_template/base.html' %}
+
+{% block main_content %}
+
+<!-- <h1>Vacancy</h1> -->
+
+     {% if messages %}
+        {% for message in messages %}
+      {% if message.tags == 'success' %}
+      <div class="form-group alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+       {% if message.tags == 'error' %}
+      <div class="form-group alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+        {% endfor %}
+      {% endif %}
+
+
+    <div class="vacancy_list">
+        <div class="vacancy_list_inner">
+            <h3 class="p-2 page_title">Vacancy</h3>
+              {% for vacancy in vacancies %}
+                {% if vacancy.amount != 0 %}
+                <div class="vacancy_block">
+                  <div class="vacancy_header_side">
+                    <h4 class="p-2 bloko-link">{{ vacancy.vacancy_name }}</h4>
+                    <div class="mt-2">
+                      <p class="comment-text">Amount of students: {{ vacancy.amount }}</p>
+                    </div>
+                  </div>
+                
+                  <div class="p-2 vacancy_body">
+                      <div class="d-flex flex-row user-info">
+                            {% if vacancy.supervisor.user_type == "2" %}
+                           <img class="rounded-circle" src="{{ vacancy.supervisor.staffs.display_image }}" width="40">
+                          {% elif vacancy.supervisor.user_type == "3" %}
+                           <img class="rounded-circle" src="{{ vacancy.supervisor.company.display_image }}" width="40">
+                          {% endif %}
+                        <div class="d-flex flex-column justify-content-start ml-2">
+                             {% if vacancy.supervisor.user_type == "2" %}
+                          <span class="bloko-link d-block font-weight-bold name">{{vacancy.supervisor}} / <i>{{ vacancy.supervisor.email }}</i></span>
+                              {% elif vacancy.supervisor.user_type == "3" %}
+                               <span class="bloko-link d-block font-weight-bold name">{{vacancy.supervisor.username}} / {{vacancy.supervisor}} / <i>{{ vacancy.supervisor.email }}</i></span>
+                                   {% endif %}
+                            <span class="date text-black-50">{{ vacancy.created_at|date:"H:iA, M d, Y" }}</span>
+                        </div>
+                        <!-- <p>Teacher email: {{ vacancy.supervisor.email }}</p> -->
+                      </div>
+                      <div class="mt-2">
+                          <p class="comment-text">{{ vacancy.requirements }}</p>
+                      </div>
+                      
+                      {% if vacancy in my_list %}
+                               {% for respond in respond %}
+                                  {% if respond.vacancy_id == vacancy %}
+                                          {% if respond.vacancy_status == 0  %}
+                                            <span class="alert alert-warning respond_pending">Pending</span>
+                                            <a class="btn btn-warning respond_cancel" href="{% url 'cancel_respond' vacancy_id=respond.vacancy_id.id %}">Cancel</a>
+                                          {% elif respond.vacancy_status == 1  %}
+                                           <span class="alert alert-success approved_btn">Approved</span>
+                                          {% elif respond.vacancy_status == 2  %}
+                                             <span class="alert alert-danger rejected_btn">Rejected</span>
+                                          {% endif %}
+                                          <div class="form-group attached_resume">
+                                            <label>Your attached resume: </label>
+                                            <a href="{{ respond.resume }}" download title="Download resume" style="vertical-align: middle;">
+                                              <i class="fa fa-download" style="color: rgb(0 123 255 / 75%);font-size: 24px;margin-left: 8px;"></i>
+                                            </a>
+                                          </div>
+                                   {% endif %}
+                              {% endfor %}
+                       {% else %}
+                              <form action="/respond" method="post" enctype="multipart/form-data" style="position: relative;">
+                                     {% csrf_token %}
+                                    <input type="hidden" class="form-control"  name="vacancy_id" value="{{ vacancy.id }}">
+                                   <div class="form-group">
+                                      <label>Please attach your resume:</label>
+                                      <input type="file" class="form-control-file" accept=".doc,.docx,application/pdf,application/vnd.ms-excel" name="file" required>
+                                      <!-- <input class="form-control-file" name="file" type="file" id="actual-btn" hidden required>
+                                      <div class="choose_btn for_resume">
+                                        <label for="actual-btn">Choose File</label>
+                                        <span id="file-chosen">No file chosen</span>
+                                      </div> -->
+                                    </div>
+                                 <div class="mt-2">
+                                <button class="btn btn-outline-primary btn-sm resume_btn" type="submit" id="{{ forloop.counter }}">Respond</button>
+                                 </div>
+                              </form>
+
+                      {% endif %}
+
+                  </div>
+                </div>
+              
+
+                  {% endif %}
+                  
+                  {% empty %}
+                  <div class="p-2">There are no vacancies yet</div>
+                {% endfor %}
+                
+      
+</div>
+     </div>
+
+
+{% endblock %}

@@ -1,9 +1,10 @@
 {% extends 'student_template/base.html' %}
 {% load humanize %}
 {% block main_content %}
-
-<h1>{{ report.report_name}}</h1>
-     <a href="{% url 'reports' %}" class="btn btn-outline-info">Return</a>
+<div class="report_page">
+    <div class="p-2 report_page_inner">
+          <h3 class="page_title">{{ report.report_name}}</h3>
+     <a href="{% url 'reports' %}" class="btn btn-outline-primary" style="position: absolute;right: 30px;top: 30px;">Back</a>
       {% if messages %}
         {% for message in messages %}
           {% if message.tags == 'error' %}
@@ -19,7 +20,7 @@
         {% endfor %}
       {% endif %}
 
-<textarea class="form-control" rows="6" name="report_detail" disabled>{{ report.report_detail}}</textarea>
+<textarea class="form-control" rows="5" name="report_detail" style="margin-top: 30px;" disabled>{{ report.report_detail}}</textarea>
  <table class="table table-hover">
     <thead>
       <tr>
@@ -69,16 +70,18 @@
                 {% if report_details.submission_status == 1  %}
               <th>
                    <a class="alert-link alert-danger" href="{{report_details.references}}" target="_blank"> {{ report_details.references }}</a></th>
-              <a href="" class="btn btn-outline-danger position-absolute cancel_open_modal" style="bottom:-40px;" data-toggle="modal" data-target="#myModal">Cancel Report</a>
+              <a href="" class="btn btn-outline-danger cancel_open_modal cancel_report_btn" data-toggle="modal" data-target="#myModal">Cancel Report</a>
           {% elif report_details.submission_status == 2 %}
-            <th><a class="alert-link alert-danger" href="{{report_details.references}}" target="_blank"> {{ report_details.references }}</a></th>
-                {% else %}
-         <form action="/submit_report" method="post" enctype="multipart/form-data">
-             {% csrf_token %}
-            <th> <input name="reference" class="form-control" type="url" required></th>
-              <input name="report_id" type="hidden" value="{{ report.id }}">
+            <th>
+              <a class="alert-link alert-danger" href="{{report_details.references}}" target="_blank"> {{ report_details.references }}</a>
+            </th>
+              {% else %}
+              <form action="/submit_report" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <th> <input name="reference" class="form-control" type="url" required></th>
+                <input name="report_id" type="hidden" value="{{ report.id }}">
                 <div class="form-group">
-                    <button type="submit" class="btn btn-outline-info position-absolute" style="bottom:-40px;">Submit report</button>
+                    <button type="submit" class="btn btn-outline-primary submit_report_btn">Submit report</button>
                  </div>
               </form>
            {% endif %}
@@ -109,12 +112,14 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-           <button type="button" class="btn btn-outline-info" id="cancel">Yes</button>
-           <a href="" class="btn btn-outline-danger">No</a>
+           <button type="button" class="btn btn-outline-danger" id="cancel">Yes</button>
+           <a href="" class="btn btn-outline-primary">No</a>
         </div>
       </div>
     </div>
   </div>
+</div>
+</div>
 
 
 {% endblock %}

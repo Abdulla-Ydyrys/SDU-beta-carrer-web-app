@@ -25,7 +25,7 @@ SECRET_KEY = '^dh$005vth4%$7axeu=+z-kf6)=komy#y0h7+z)_v)qvc1d!o='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -60,6 +60,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'sdu_beta_web.urls'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, '/sdu_beta_web_app/static'),
+)
 
 TEMPLATES = [
     {
@@ -141,7 +145,7 @@ DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIl_PORT = 587
-EMAIL_HOST_USER = ""
-EMAIL_HOST_PASSWORD = ""
+EMAIL_HOST_USER = "sdubetacareer2021@gmail.com"
+EMAIL_HOST_PASSWORD = "sdubetawebapp2021"
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = "SDU BETA"
+DEFAULT_FROM_EMAIL = "SDU Beta Web App"

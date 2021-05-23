@@ -3,7 +3,7 @@
 
 {% block main_content %}
 
-<h1>My Interns</h1>
+<h3 class="page_title">My Interns</h3>
 
  <table class="table table-hover">
      {% if messages %}
@@ -36,18 +36,18 @@
           <form action="/company_grade" method="post" enctype="multipart/form-data">
                  {% csrf_token %}
           <td>
-              <input type="hidden" class="form-control"  name="reg_id" value="{{ reg.student_id.id }}">
+              <input type="hidden" class="form-control"  name="reg_id" value="{{ reg.student_id.id }}" required="">
               {% for grades_list in grades_list %}
                     {% if reg.student_id == grades_list.student_id %}
-              <input type="number"  class="form-control" name="sup_grade" value="{{ grades_list.supervisor_marks }}" max="100" min="0">
+              <input type="number"  class="form-control" name="sup_grade" value="{{ grades_list.supervisor_marks }}" max="100" min="0" required>
                     {% endif %}
                  {%endfor%}
 
           </td>
                    {% endfor %}
              {% if studentList %}
-        <div class="form-group">
-    <button type="submit" class="btn btn-outline-info">Set Grade</button>
+        <div class="form-group" style="float: right;">
+          <button type="submit" class="btn btn-outline-primary">Save Grade</button>
        </div>
              {% endif %}
            </form>

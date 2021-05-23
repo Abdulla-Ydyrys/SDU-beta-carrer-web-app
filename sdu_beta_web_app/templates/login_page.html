@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+     <link rel="stylesheet" type="text/css" href="/static/css/login.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -14,45 +15,47 @@
 
   </head>
 
-  <body class="text-center">
-  <div class="container col-4">
-    <form action="/sign_in", method="post">
-        {% csrf_token %}
-      <h1>Please sign in</h1>
-      <div class="form-group">
-    <label>Email address:</label>
-      <input class="form-control" type="email" name="email" placeholder="Email address" required autofocus>
-  </div>
-  <div class="form-group">
-    <label>Password:</label>
-     <input class="form-control" type="password" name="password" placeholder="Password" required>
-  </div>
-       <div class="form-group">
-      <button class="btn btn-outline-info" type="submit">Sign in</button>
-       </div>
+  <body class="">
+    <div class="login_page">
+      <div style="">
+        <div class="inner_login_page"> 
+          {% if messages %}
+              {% for message in messages %}
+                {% if message.tags == 'error' %}
+            <div class="form-group alert alert-warning alert-dismissible fade show" role="alert">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+               <strong>{{ message }}</strong></div>
+               {% endif %}
+            {% if message.tags == 'success' %}
+            <div class="form-group alert alert-success alert-dismissible fade show" role="alert">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+               <strong>{{ message }}</strong></div>
+               {% endif %}
+              {% endfor %}
+            {% endif %}
 
-        <div class="form-group">
-      <a href="{% url 'password_reset' %}" class="btn btn-outline-danger">Reset password</a>
-       </div>
+          <form action="/sign_in" method="post">
+            {% csrf_token %}
+            <h1 style="text-align: center; margin-bottom: 25px;">Login</h1>
+            <div class="form-group">
+              <input class="form-control" type="email" name="email" placeholder="Email address" required autofocus>
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="form-group" style="text-align: center;">
+              <a href="{% url 'password_reset' %}" class="btn-outline-danger">Reset password</a>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Login</button>
+            </div>
 
-
-        <div class="form-group">
-      Don't have an account? <a href="{% url 'password_reset' %}" class="btn btn-outline-danger">Sign UP</a>
-       </div>
-
-    {% if messages %}
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {% for message in messages %}
-          {% if message.tags == 'error' %}
-         <strong>{{ message }}</strong>
-         {% endif %}
-        {% endfor %}
+            <div class="form-group" style="text-align: center;">
+               <a href="{% url 'sign_up' %}" class="btn-outline-danger">Don't have an account?</a>
+            </div>
+          </form>
+        </div>
       </div>
-
-      {% endif %}
-
-    </form>
-  </div>
+    </div>
   </body>
 </html>

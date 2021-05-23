@@ -2,17 +2,19 @@
 
 {% block main_content %}
 
-<h1>Student Feedback</h1>
+<div class="student_feedback">
+  <div class="p-2 student_feedback_inner">
+    <h3 class="page_title">Student Feedback</h3>
   <form action="/save_feedback" method="post" enctype="multipart/form-data">
       {% csrf_token %}
     <div class="form-group">
       <label >Feedback Message:</label>
-       <textarea class="form-control" rows="5" name="feedback"></textarea>
+       <textarea class="form-control" name="feedback" required></textarea>
     </div>
 
 
        <div class="form-group">
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-outline-primary send_feedback">Submit</button>
        </div>
 
        {% if messages %}
@@ -54,6 +56,8 @@
     </tbody>
   </table>
 
+  </div>
+</div>
 
 
 {% endblock main_content %}

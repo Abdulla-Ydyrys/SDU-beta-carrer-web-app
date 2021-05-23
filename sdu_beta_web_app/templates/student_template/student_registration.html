@@ -1,49 +1,182 @@
 {% extends 'student_template/base.html' %}
 
 {% block main_content %}
-
-<h1>Student registration</h1>
-
+<div class="registration_page">
+  <!-- <h1>Student registration</h1> -->
+  <h3 class="p-2 page_title">Beta Registration</h3>
+{% if messages %}
+  {% for message in messages %}
+    {% if message.tags == 'error' %}
+    <div class="form-group alert alert-warning alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+       <strong>{{ message }}</strong>
+    </div>
+    {% endif %}
+    {% if message.tags == 'success' %}
+    <div class="form-group alert alert-success alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{ message }}</strong>
+    </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
  {% for dat in data %}
  <input id="reg_id" type="hidden" value="{{ dat.id }}">
-                        {% now "Y-m-d\TH:i" as todays_date %}
-  {% if expiration_date.end_date|date:"Y-m-d\TH:i" > todays_date  %}
-
-                               STATUS : {% if dat.registration_status == 1 %}
-                                    <span class="alert alert-success">Approved</span>
-                                 <a href="{{ dat.agreement }}" download>FILE</a>
-       <a href="" class="btn btn-outline-danger cancel_open_modal" data-toggle="modal" data-target="#myModal">Cancel Registration</a>
-                                <p>Supervisor: {{ dat.supervisor_id.username }}</p>
-                                <p>Beta Type: {{ dat.beta_type }}</p>
-                                {% elif dat.registration_status == 2 %}
-                                    <span class="alert alert-danger">Rejected</span>
-                                <a href="{{ dat.agreement }}" download>FILE</a>
-       <a href="" class="btn btn-outline-danger cancel_open_modal" data-toggle="modal" data-target="#myModal">Cancel Registration</a>
-                                <p>Reject Reason: {{ dat.reject_reason }}</p>
-                                <p>Supervisor: {{ dat.supervisor_id.username }}</p>
-                                <p>Beta Type: {{ dat.beta_type }}</p>
-                                {% else %}
-
-                                    <span class="alert alert-warning">Pending</span>
-                                <a href="{{ dat.agreement }}" download>FILE</a>
-       <a href="" class="btn btn-outline-danger cancel_open_modal"  data-toggle="modal" data-target="#myModal">Cancel Registration</a>
-                            <p>Supervisor: {{ dat.supervisor_id.username }}</p>
-                                <p>Beta Type: {{ dat.beta_type }}</p>
-{% endif %}
-
+ 
+  {% now "Y-m-d\TH:i" as todays_date %}
+    {% if expiration_date.end_date|date:"Y-m-d\TH:i" > todays_date  %}
+      <ul id="progressbar">
+        <li class="active_pending"><span>Beta Registration</span></li>
+        <li class="active_pending"><span>Pending</span></li>
+        {% if dat.registration_status == 1 %}
+          <li class="active"><span>Approved</span></li>
+        {% elif dat.registration_status == 2 %}
+          <li class="active_rejecteed"><span>Rejected</span></li>
+        {% else %}
+          <li><span>Status</span></li>
+        {% endif %}
+      </ul>
+      <div class="beta_registration">
+        <div class="left_side">
+          <div class="registration_card card">
+            {% if dat.registration_status == 1 %}
+            <h2 class="title_approved">Approved</h2>
+            <div class="line approved"></div>
+            {% elif dat.registration_status == 2 %}
+            <h2 class="title_rejected">Rejected</h2>
+            <div class="line rejected"></div>
             {% else %}
-            <p>SDU beta registration is CLOSED.</p>
-                STATUS : {% if dat.registration_status == 1 %}
-                                    <span class="alert alert-success">Approved</span>
-                                <p><br>Supervisor: {{ dat.supervisor_id }}</p>
-                                <p>Beta Type: {{ dat.beta_type }}</p>
-                                {% elif dat.registration_status == 2 %}
-                                    <span class="alert alert-danger">Rejected</span>
-                                 <p><br>Reject Reason: {{ dat.reject_reason }}</p>
-                                <p>Supervisor: {{ dat.supervisor_id }}</p>
-                                <p>Beta Type: {{ dat.beta_type }}</p>
-                                 {% endif %}
+            <h2 class="title_pending">Pending</h2>
+            <div class="line pending"></div>
+            {% endif %}
+            <div class="registration_info">
+              <table>
+                <tr>
+                  <th>Beta Type:</th>
+                  <td>{{ dat.beta_type }}</td>
+                </tr>
+                <tr>
+                  <th>Supervisor:</th>
+                  <td>{{ dat.supervisor_id }}</td>
+                </tr>
+                <tr>
+                  <th>Status:</th>
+                  <td сlass="status_text">
+                      {% if dat.registration_status == 1 %}
+                      <span class="status_btn approved">Approved</span> 
+                      {% elif dat.registration_status == 2 %}
+                      <span class="status_btn reject">Rejected</span>
+                      {% else %}
+                      <span class="status_btn pending">Pending</span>  
+                      {% endif %}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Agreement:</th>
+                  <td><a href="{{ dat.agreement }}" download title="Download agreement"><i class="fa fa-download" style="color: rgb(0 123 255 / 75%); font-size: 20px;"></i></a></td>
+                </tr>
+                {% if dat.reject_reason %}
+                  <tr>
+                    <th style="min-width: 116px;">Reject Reason:</th>
+                    <td>{{ dat.reject_reason }}</td>
+                  </tr>
+                {% endif %}
+              </table>
+            </div>
+            <div class="">
+              <a href="" class="btn btn-outline-danger cancel_open_modal" data-toggle="modal" data-target="#myModal">Cancel Registration</a>
+            </div>
+          </div>
+        </div>
+        <div class="right_side">
+          <div class="right_side_background">
+            <div class="text-background">
+              {% if dat.registration_status == 1 %}
+              <h4>Approved</h4>
+              <p>- this means that your application has been successfully submitted.<br><br> If you filled out the form correctly and attached the agreement, then wait for the coordinator's response</p>
+              {% elif dat.registration_status == 2 %}
+              <h4>Rejected</h4>
+              <p>- this means that your application has been successfully submitted.<br><br> If you filled out the form correctly and attached the agreement, then wait for the coordinator's response</p>
+              {% else %}
+              <h4>Pending</h4>
+              <p>- this means that your application has been successfully submitted.<br><br> If you filled out the form correctly and attached the agreement, then wait for the coordinator's response</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <ul id="progressbar">
+        <li class="active_pending"><span>Beta Registration</span></li>
+        <li class="active_pending"><span>Pending</span></li>
+        {% if dat.registration_status == 1 %}
+          <li class="active"><span>Approved</span></li>
+        {% elif dat.registration_status == 2 %}
+          <li class="active_rejecteed"><span>Rejected</span></li>
+        {% else %}
+          <li><span>Status</span></li>
+        {% endif %}
+      </ul>
+      <div class="beta_registration">
+        <div class="left_side">
+          <div class="registration_card card">
+            {% if dat.registration_status == 1 %}
+            <h2 class="title_approved">Approved</h2>
+            <div class="line approved"></div>
+            {% elif dat.registration_status == 2 %}
+            <h2 class="title_rejected">Rejected</h2>
+            <div class="line rejected"></div>
+            {% endif %}
+            <div class="registration_info">
+              <table>
+                <tr>
+                  <th>Beta Type:</th>
+                  <td>{{ dat.beta_type }}</td>
+                </tr>
+                <tr>
+                  <th>Supervisor:</th>
+                  <td>{{ dat.supervisor_id }}</td>
+                </tr>
+                <tr>
+                  <th>Status:</th>
+                  <td сlass="status_text">
+                      {% if dat.registration_status == 1 %}
+                      <span class="status_btn approved">Approved</span> 
+                      {% elif dat.registration_status == 2 %}
+                      <span class="status_btn reject">Rejected</span>
+                      {% else %}
+                      <span class="status_btn pending">Pending</span>  
+                      {% endif %}
+                  </td>
+                </tr>
+                {% if dat.reject_reason %}
+                <tr>
+                  <th style="min-width: 116px;">Reject Reason:</th>
+                  <td>{{ dat.reject_reason }}</td>
+                </tr>
+                {% endif %}
+              </table>
+            </div>
+            <p class="title">SDU beta registration is CLOSED</p>
+          </div>
+        </div>
+        <div class="right_side">
+          <div class="right_side_background">
+            <div class="text-background">
+              {% if dat.registration_status == 1 %}
+              <h4>Approved</h4>
+              <p>- this means that your application has been successfully submitted.<br><br> If you filled out the form correctly and attached the agreement, then wait for the coordinator's response</p>
+              {% elif dat.registration_status == 2 %}
+              <h4>Rejected</h4>
+              <p>- this means that your application has been successfully submitted.<br><br> If you filled out the form correctly and attached the agreement, then wait for the coordinator's response</p>
+              {% else %}
+              <h4>Pending</h4>
+              <p>- this means that your application has been successfully submitted.<br><br> If you filled out the form correctly and attached the agreement, then wait for the coordinator's response</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
       {% endif %}
 
 
@@ -51,73 +184,84 @@
 
 {% now "Y-m-d\TH:i" as todays_date %}
   {% if expiration_date.end_date|date:"Y-m-d\TH:i" > todays_date %}
- <form action="{% url 'confirm_registration' %}" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-                <div class="form-group">
-                <label>Agreement</label>
-                <input type="file" class="form-control-file" name="agreement" required>
-              </div>
-                <div class="form-group">
-                 <label >Beta Career type:</label>
-                  <select class="form-control" name="beta_type" id="beta_type"  onchange="var optionVal = $(this).find(':selected').val(); doSomething(optionVal)">
-                <option>Academic Beta</option>
-                <option>SDU Beta</option>
-                <option>Industrial Beta</option>
-              </select>
-                </div>
+  <ul id="progressbar">
+    <li class="active"><span>Beta Registration</span></li>
+    <li><span style="color: #212529;">Pending</span></li>
+    <li><span style="color: #212529;">Status</span></li>
+  </ul>
+  <div class="beta_registration">
 
+    <div class="left_side">
 
-                <div id="sta">
+      <form action="{% url 'confirm_registration' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group expiration_date">
+          <i class="fa fa-calendar"></i>
+          <div class="exp_date">
+            <h5>{{expiration_date.end_date|date:'d/m/Y H:i'}}</h5>
+            <label>End of registration date</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label >Beta Career type:</label>
+          <select class="form-control" name="beta_type" id="beta_type"  onchange="var optionVal = $(this).find(':selected').val(); doSomething(optionVal)">
+            <option>Academic Beta</option>
+            <option>SDU Beta</option>
+            <option>Industrial Beta</option>
+          </select>
+        </div>
+        <div id="sta">
+          <div class="form-group" id="staff">
+            <label >Choose your Supervisor:</label>
+            <select class="form-control" name="staffs" id="staffs">
+              {% for staff in staffs %}
+              <option value="{{ staff.id }}">{{ staff.last_name }} {{ staff.first_name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div id="comp">
+        </div>
+        <div class="form-group">
+          <label>Agreement:</label>
+          <!-- <input type="file" class="form-control" id="customFile" name="agreement" required /> -->
+           <input class="form-control" name="agreement" type="file" id="actual-btn" accept=".doc,.docx,application/pdf,application/vnd.ms-excel" hidden required/>
+          <div class="choose_btn" style="display: flex;">
+            <!-- our custom upload button -->
+            <label for="actual-btn">Choose File</label>
+            <!-- name of file chosen -->
+            <p id="file-chosen">No file chosen</p>
+          </div>
 
-
-                <div class="form-group" id="staff">
-                 <label >Choose your Supervisor</label>
-                  <select class="form-control" name="staffs" id="staffs">
-                        {% for staff in staffs %}
-                <option value="{{ staff.id }}">{{ staff.first_name }} {{ staff.last_name }}</option>
-                            {% endfor %}
-                </select>
-                </div>
-
-                 </div>
-
-
-                <div id="comp">
-
-                </div>
-
-           <div class="form-group">
-    <button type="submit" class="btn btn-primary">Confirm</button>
-       </div>
-      {% else %}
-        <p>SDU beta registration is CLOSED. You didn't register!</p>
-      {% endif %}
-       </form>
-{% endfor %}
-
-             {% if messages %}
-                    {% for message in messages %}
-                      {% if message.tags == 'error' %}
-                  <div class="form-group alert alert-warning alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                     <strong>{{ message }}</strong></div>
-                     {% endif %}
-                  {% if message.tags == 'success' %}
-                  <div class="form-group alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                     <strong>{{ message }}</strong></div>
-                     {% endif %}
-                        {% endfor %}
-                     {% endif %}
-
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog">
+        </div>
+        
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary confirm">Confirm</button>
+        </div>
+        
+      </form>
+    </div>
+    <div class="right_side">
+      <div class="right_side_background">
+        <div class="text-background">
+          <h4>Beta Career Registration</h4>
+          <p>You can register a beta career by filling out this form. Fill out the form correctly and wait for the cardinator's response.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+    <div class="p-2">SDU beta registration is CLOSED. You have not registered!</div>
+  {% endif %}
+  {% endfor %}
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog cancel_register_modal">
       <div class="modal-content">
 
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Cancel confirmation</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="cancel_register close" data-dismiss="modal">&times;</button>
         </div>
 
         <!-- Modal body -->
@@ -128,12 +272,14 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-           <button type="button" class="btn btn-outline-info" id="cancel">Yes</button>
-           <a href="" class="btn btn-outline-danger">No</a>
+          <button type="button" class="btn btn-outline-danger modal_danger" id="cancel">Yes, cancel</button>
+          <a href="" class="btn btn-outline-primary modal_primary">No</a>
         </div>
       </div>
     </div>
   </div>
+</div>
+
 
 
 
@@ -147,6 +293,7 @@
 
 {% block custom_js %}
 <script>
+
 $(document).ready(function(){
         $(".cancel_open_modal").click(function(){
             var id = $( "#reg_id" ).val()
@@ -205,6 +352,7 @@ $(document).ready(function(){
   )
     }
 }
+
 
 
 

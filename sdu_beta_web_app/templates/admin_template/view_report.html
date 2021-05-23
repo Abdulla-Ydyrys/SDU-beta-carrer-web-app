@@ -2,30 +2,28 @@
 
 {% block main_content %}
 
-<h1> {{ report_id.report_name }}</h1>
-
+<div class="d-flex justify-content-between align-items-center">
+    <h3 class="mb-4">{{ report_id.report_name }}</h3>
+    <div>
+        <a href="{% url 'manage_report' %}" class="btn btn-outline-primary" style="margin-right: 3px;">Back</a>
+    </div>
+</div>
 
 <form method="get">
 
-          <div class="container">
-    <div class="row ">
 
-    <div class="form-group">
-      <label for="id_student_id">Search by student name</label>
-        <input type="text" class="form-control" name="student_id" id="id_student_id">
-    </div>
-
-
- <div class="offset-md-1" style="padding-top:30px;">
-    <button type="submit" class="btn btn-outline-info">Search</button>
-              </div>
-
-         </div>
+    <div class="d-flex">
+        <div class="form-group align-items-start flex-column">
+            <label for="id_student_id">Search by student ID</label>
+            <input type="text" class="form-control" name="student_id" id="id_student_id" style="padding: 9px;">
         </div>
+        <div class="ml-3" style="padding-top:32px;">
+            <button type="submit" class="btn btn-outline-primary">Search</button>
+        </div>
+    </div>
 </form>
 
-<a href="{% url 'manage_report' %}" class="btn btn-outline-info">Return</a>
- <table class="table table-hover">
+ <table class="table">
      {% if messages %}
         {% for message in messages %}
       {% if message.tags == 'success' %}
@@ -44,6 +42,7 @@
     <thead>
       <tr>
         <th>Student</th>
+          <th>ID</th>
           <th>Reference</th>
         <th >Status</th>
         <th width="12%">Grade</th>
@@ -55,11 +54,13 @@
       <tr>
 
 
+<td>{{report.student_id.student.last_name}} {{report.student_id.student.first_name}} </td>
 
-          <td>{{report.student_id.student.first_name}} {{report.student_id.student.last_name}}</td>
+          <td>{{report.student_id.student.username}} </td>
+
           <td>
               {% if report.submission_status != 0 %}
-              <a class="alert-link alert-danger" href="{{report.references}}" target="_blank">Reference</a>
+              <a class="alert-link alert-primary" href="{{report.references}}" target="_blank">Reference</a>
               {% endif %}
           </td>
 
@@ -74,6 +75,7 @@
              <form action="/set_grade" method="post" enctype="multipart/form-data">
                  {% csrf_token %}
           <td>
+
                     <input type="hidden" class="form-control"  name="submit_id" value="{{ report.id }}">
                     <input type="hidden" class="form-control"  name="report_id" value="{{ report_id.id }}">
 
@@ -87,7 +89,7 @@
                    {% endfor %}
                  {% if reports %}
         <div class="form-group">
-    <button type="submit" class="btn btn-outline-info">Set</button>
+    <button type="submit" class="btn btn-outline-primary d-flex ml-auto minus-margin">Save Grade</button>
        </div>
                   {% endif %}
            </form>

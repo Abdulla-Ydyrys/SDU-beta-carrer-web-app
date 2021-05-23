@@ -1,0 +1,59 @@
+{% extends 'student_template/base.html' %}
+
+{% block main_content %}
+
+
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <h3 class="page_title">Edit Student profile</h3>
+  </div>
+   
+            {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'error' %}
+      <div class="form-group alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+      {% if message.tags == 'success' %}
+      <div class="form-group alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <strong>{{ message }}</strong></div>
+         {% endif %}
+        {% endfor %}
+      {% endif %}
+  <form action="{% url 'update_student_profile' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+    <div class="form-group profile_flex">
+      <label >Email:</label>
+      <input type="email" class="form-control"  placeholder="Enter email" name="email" value="{{ user.email }}" disabled="disabled">
+    </div>
+    <div class="form-group profile_flex">
+      <label >First Name:</label>
+      <input type="text" class="form-control"  placeholder="Enter First Name" name="first_name" value="{{ user.first_name }}">
+    </div>
+    <div class="form-group profile_flex">
+      <label >Last Name:</label>
+      <input type="text" class="form-control"  placeholder="Enter Last Name" name="last_name" value="{{ user.last_name }}">
+    </div>
+       <div class="form-group profile_flex">
+      <label >SDU ID:</label>
+      <input type="number" class="form-control"  placeholder="Enter SDU ID" name="username" value="{{ user.username }}">
+    </div>
+      <div class="form-group profile_flex">
+      <label >Address:</label>
+      <input type="text" class="form-control"  placeholder="Enter Address" name="address" value="{{ user.students.address }}">
+    </div>
+      <div class="form-group profile_flex">
+        <label>Picture:</label>
+        <input type="file" class="form-control-file" name="picture" accept="image/jpeg,image/png,image/gif">
+      </div>
+      <div class="form-group" style="position: absolute;top: 22px;right: 22px;">
+        <button type="submit" class="btn btn-outline-primary">Save</button>
+      </div>
+  </form>
+
+
+
+
+
+{% endblock %}

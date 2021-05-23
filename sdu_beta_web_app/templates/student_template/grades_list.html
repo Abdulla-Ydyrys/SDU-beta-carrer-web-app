@@ -4,73 +4,173 @@
 
 
 
-<h1>Grades List</h1>
+<!-- <h1>Grades List</h1> -->
 
-<table class="table table-bordered table-hover">
-  <thead>
-   <tr>
-        <th>{{ student.student.first_name }} {{ student.student.last_name }} | ID: {{ student.student.username }}</th>
-      <td colspan="4" class="text-center">Coordinator: Baurzhan Berlikkozha, Supervisor: {{supervisor.username}}</td>
-    </tr>
-    <tr>
-      <th scope="col">Assesment</th>
-      <th scope="col">Grades</th>
-      <th scope="col">Average</th>
-      <th scope="col">Grader</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Formative Assessment (60/100)</th>
-      <td>{{ s_mark }}</td>
-      <td>{{ s_mark }}</td>
-      <td>Supervisor</td>
-    </tr>
-    <tr>
-      <th scope="row">Reports (15/100)</th>
-      <td>{{ grade }} </td>
-      <td>{{ grade }}</td>
-      <td>Coordinator</td>
-    </tr>
-    <tr>
-      <th scope="row">Final Presentation (25/100)</th>
-      <td>{{ f_mark }}</td>
-      <td>{{ f_mark }}</td>
-      <td>Coordinator</td>
-    </tr>
-   <tr>
-      <th scope="row">Total</th>
-      <td colspan="2" class="text-center">{{ total }} </td>
-      <td>Letter Grade:
-          {% if total >= 0 and total < 25 %}
-          F
-          {% elif total >= 25 and total < 50 %}
-          FX
-          {% elif total >= 50 and total < 55 %}
-          D
-          {% elif total >= 55 and total < 60 %}
-          D+
-          {% elif total >= 60 and total < 65 %}
-          C-
-          {% elif total >= 65 and total < 70 %}
-          C
-          {% elif total >= 70 and total < 75 %}
-          C+
-          {% elif total >= 75 and total < 80 %}
-          B-
-          {% elif total >= 80 and total < 85 %}
-          B
-          {% elif total >= 85 and total < 90 %}
-          B+
-          {% elif total >= 90 and total < 95 %}
-          A-
-          {% elif total >= 95 and total <= 100 %}
-          A
-            {% endif %}
-      </td>
-    </tr>
-  </tbody>
-</table>
-
+<div class="grades_list_page">
+  <div class="p-2 grades_list_inner">
+    <h3 class="page_title">Grades List</h3>
+    <div class="header_info">
+      <div>
+          <p>Student Name: {{ student.student.first_name }} {{ student.student.last_name }}</p>
+          <p>Student ID: {{ student.student.username }}</p>
+      </div>
+      <div>
+        <p>Coordinator: {{ coordinator.admin.last_name }} {{ coordinator.admin.first_name }}</p>
+        <p>Supervisor: {{supervisor.last_name}} {{supervisor.first_name}}</p>
+      </div>
+    </div>
+    <table class="table table-hover grades_table">
+      <thead>
+        <tr>
+          <th scope="col">Assesment</th>
+          <th scope="col">Grades</th>
+          <th scope="col">Average</th>
+          <th scope="col">Grader</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Formative Assessment (60/100)</th>
+          <td>{{ s_mark }}</td>
+          <td>{{ s_mark }}</td>
+          <td>Supervisor</td>
+        </tr>
+        <tr>
+          <th scope="row">Reports (15/100)</th>
+          <td>{{ grade }} </td>
+          <td>{{ grade }}</td>
+          <td>Coordinator</td>
+        </tr>
+        <tr>
+          <th scope="row">Final Presentation (25/100)</th>
+          <td>{{ f_mark }}</td>
+          <td>{{ f_mark }}</td>
+          <td>Coordinator</td>
+        </tr>
+       <tr>
+          <th scope="row">Total</th>
+          <td colspan="2" class="text-center">{{ total }} </td>
+          <td style="font-weight: bold;">Letter Grade:
+              {% if  f_mark != 0 %}
+              {% if total >= 0 and total < 25 %}
+              F
+              {% elif total >= 25 and total < 50 %}
+              FX
+              {% elif total >= 50 and total < 55 %}
+              D
+              {% elif total >= 55 and total < 60 %}
+              D+
+              {% elif total >= 60 and total < 65 %}
+              C-
+              {% elif total >= 65 and total < 70 %}
+              C
+              {% elif total >= 70 and total < 75 %}
+              C+
+              {% elif total >= 75 and total < 80 %}
+              B-
+              {% elif total >= 80 and total < 85 %}
+              B
+              {% elif total >= 85 and total < 90 %}
+              B+
+              {% elif total >= 90 and total < 95 %}
+              A-
+              {% elif total >= 95 and total <= 100 %}
+              A
+                {% endif %}
+                 {% else %}
+              IP
+              {% endif %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="grade_conversions">
+      <table class="conversions table">
+        <thead>
+          <tr>
+            <th colspan="4" style="text-align: center;background-color: rgb(250 251 252);">Grade Conversions</th>
+          </tr>
+          <tr>
+            <th>In Percent</th>
+            <th>Alphabetic</th>
+            <th>In Points</th>
+            <th>Traditional</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>95 - 100</td>
+            <td>A</td>
+            <td>4</td>
+            <td rowspan="2" style="border-left: 1px solid #dee2e6;">Excellent</td>
+          </tr>
+          <tr>
+            <td>90 - 94</td>
+            <td>A-</td>
+            <td>3.67</td>
+          </tr>
+          <tr>
+            <td>85 - 89</td>
+            <td>B+</td>
+            <td>3.33</td>
+            <td rowspan="4" style="border-left: 1px solid #dee2e6;">Good</td>
+          </tr>
+          <tr>
+            <td>80 - 84</td>
+            <td>B</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>75 - 79</td>
+            <td>B-</td>
+            <td>2.67</td>
+          </tr>
+          <tr>
+            <td>70 - 74</td>
+            <td>C+</td>
+            <td>2.33</td>
+          </tr>
+          <tr>
+            <td>65 - 69</td>
+            <td>C</td>
+            <td>2</td>
+            <td rowspan="4" style="border-left: 1px solid #dee2e6;">Satisfactory</td>
+          </tr>
+          <tr>
+            <td>60 - 64</td>
+            <td>C-</td>
+            <td>1.67</td>
+          </tr>
+          <tr>
+            <td>55 - 59</td>
+            <td>D+</td>
+            <td>1.33</td>
+          </tr>
+          <tr>
+            <td>50 - 54</td>
+            <td>D</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>25 - 49</td>
+            <td>FX</td>
+            <td>0</td>
+            <td rowspan="3" style="border-bottom: 1px solid #dee2e6; border-left: 1px solid #dee2e6;">Unsatisfactory</td>
+          </tr>
+          <tr>
+            <td>0 - 24</td>
+            <td>F</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>0 - 24</td>
+            <td>FC</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table> 
+    </div>
+  </div>
+</div>
 
 {% endblock %}

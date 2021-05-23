@@ -1,0 +1,529 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} 
+body {
+    width: 100%;
+    height: 100%;
+}
+html {
+    width: 100%;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+.root .inner {
+    background-color: rgb(244, 245, 247);
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+.header {
+	display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    position: fixed;
+    top: 0px;
+    left: auto;
+    right: 0px;
+    background-color: rgb(86, 100, 210);
+    box-shadow: none;
+    color: rgb(255, 255, 255);
+    z-index: 1300;
+}
+.header .navbar.navbar-dark {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+.navbar-brand {
+	margin-left: 40px;
+}
+.header_nav {
+	display: flex;
+	align-items: center;
+}
+.nav_profile {
+	margin-left: 16px;
+}
+.profile_btn {
+	-webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    background-color: transparent;
+    outline: 0px;
+    border: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    padding: 0px;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    color: inherit;
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    outline: none;
+}
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+	outline: none;
+}
+.profile {
+	position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 1.25rem;
+    line-height: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    user-select: none;
+    height: 32px;
+    width: 32px;
+}
+.profile img, .profile_image img, .profile_page_image img {
+	width: 100%;
+    height: 100%;
+    text-align: center;
+    object-fit: cover;
+    color: transparent;
+    text-indent: 10000px;
+}
+
+.css-79ws1d-MuiModal-root {
+    position: fixed;
+    z-index: 1300;
+    inset: 0px;
+}
+.css-re7u0o-MuiBackdrop-root {
+    z-index: -1;
+    position: fixed;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    inset: 0px;
+    background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+}
+.MuiPopover-paper {
+    outline: 0;
+    position: absolute;
+    max-width: calc(100% - 32px);
+    min-width: 16px;
+    max-height: calc(100% - 32px);
+    min-height: 16px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.css-111g1eb-MuiPaper-root {
+    background-color: rgb(255, 255, 255);
+    color: rgb(23, 43, 77);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 16px;
+    box-shadow: rgb(0 0 0 / 31%) 0px 0px 1px 0px, rgb(0 0 0 / 25%) 0px 5px 8px -2px;
+    width: 240px;
+}
+.css-yj6p2f {
+    padding: 16px;
+}
+.css-1o6a83x-MuiTypography-root, .css-1th4wo4-MuiTypography-root {
+    margin: 0px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.57;
+    color: rgb(23, 43, 77);
+}
+.css-9mgopn-MuiDivider-root {
+    margin: 0px;
+    flex-shrink: 0;
+    border-width: 0px 0px thin;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.12);
+}
+.css-1th4wo4-MuiTypography-root {
+    color: rgb(107, 119, 140);
+}
+.css-1icgf7x {
+    margin-top: 16px;
+}
+.css-12jf6st-MuiButtonBase-root-MuiListItem-root-MuiMenuItem-root {
+    -webkit-tap-highlight-color: transparent;
+    background-color: transparent;
+    outline: 0px;
+    border: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    color: inherit;
+    display: flex;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    text-decoration: none;
+    text-align: left;
+    padding: 6px 16px;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    min-height: 48px;
+    box-sizing: border-box;
+    width: auto;
+    white-space: nowrap;
+}
+.css-12jf6st-MuiButtonBase-root-MuiListItem-root-MuiMenuItem-root:hover {
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+.css-8zsz8k-MuiListItemIcon-root {
+    color: rgb(107, 119, 140);
+    flex-shrink: 0;
+    display: inline-flex;
+    min-width: auto;
+    margin-right: 16px;
+}
+.css-tlelie-MuiListItemText-root {
+    flex: 1 1 auto;
+    min-width: 0px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.css-yj6p2f a:hover {
+	text-decoration: none;
+}
+.css-m8b6ho-MuiButtonBase-root-MuiButton-root {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    background-color: transparent;
+    outline: 0px;
+    margin: 0px;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    min-width: 64px;
+    padding: 5px 15px;
+    border-radius: 16px;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border: 1px solid rgba(86, 100, 210, 0.5);
+    color: rgb(86, 100, 210);
+    width: 100%;
+    text-transform: none;
+}
+.css-m8b6ho-MuiButtonBase-root-MuiButton-root:hover {
+    text-decoration: none;
+    background-color: rgba(86, 100, 210, 0.04);
+    border: 1px solid rgb(86, 100, 210);
+}
+.css-1t7fjoj-MuiModal-root {
+    visibility: hidden;
+}
+
+
+
+
+/*SideBar*/
+
+.sitebar {
+	flex: 0 0 auto;
+}
+.sitebar .list-group {
+	color: rgb(23, 43, 77);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    box-shadow: none;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    z-index: 1200;
+    position: fixed;
+    outline: 0px;
+    left: 0px;
+    right: auto;
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+    background-color: rgb(255, 255, 255);
+    width: 280px;
+    height: calc(100% - 64px) !important;
+    top: 74px !important;
+    border-radius: 0px;
+}
+.student_profile {
+	padding: 16px;
+}
+.student_profile_inner {
+	-webkit-box-align: center;
+    align-items: center;
+    background-color: rgb(244, 245, 247);
+    border-radius: 16px;
+    display: flex;
+    overflow: hidden;
+    padding: 16px;
+}
+.profile_image {
+    position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 1.25rem;
+    line-height: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    user-select: none;
+    cursor: pointer;
+    height: 48px;
+    width: 48px;
+}
+.profile_name {
+	margin-left: 16px;
+}
+.profile_name h6, .profile_name p {
+	margin: 0px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.57;
+    color: rgb(23, 43, 77);
+}
+.profile_name p {
+    font-weight: 400;
+    line-height: 1.43;
+    color: rgb(107, 119, 140);
+}
+.divider {
+	margin: 0px;
+    flex-shrink: 0;
+    border-width: 0px 0px thin;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.12);
+}
+.sidebar_menu {
+	padding: 16px;
+}
+.list_root {
+	list-style: none;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+.list_item {
+	-webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+    display: flex;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.list_item a {
+	display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    background-color: transparent;
+    outline: 0px;
+    border: 0px;
+    margin: 0px;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 0.875rem;
+    line-height: 1.75;
+    min-width: 64px;
+    border-radius: 16px !important;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    color: rgb(107, 119, 140);
+    font-weight: 500;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 12px 8px 12px 16px;
+    text-transform: none;
+    width: 100%;
+}
+.list_item a:hover {
+	text-decoration: none;
+    background-color: rgba(86, 100, 210, 0.04);
+}
+.list-group-item.active {
+	color: rgb(86, 100, 210);
+    background-color: #007bff00;
+}
+.css-1d6wzja-MuiButton-startIcon {
+    display: inherit;
+    margin-right: 8px;
+}
+.css-ptiqhd-MuiSvgIcon-root {
+    user-select: none;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    fill: currentcolor;
+    flex-shrink: 0;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-size: 1.25rem;
+}
+svg {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+
+
+
+
+
+/*Main*/
+
+.main {
+	display: flex;
+    flex: 1 1 auto;
+    overflow: hidden;
+    padding-top: 74px;
+    min-height: 100vh;
+}
+.main_inner {
+	display: flex;
+    flex: 1 1 auto;
+    overflow: hidden;
+	padding-left: 24px;
+    padding-right: 24px;
+}
+.inner {
+	flex: 1 1 auto;
+    height: 100%;
+    overflow: auto;
+    position: relative;
+}
+.css-q6qqzq {
+	background-color: rgb(244, 245, 247);
+    min-height: 100%;
+    padding-top: 30px;
+    padding-bottom: 64px;
+    width: 100%;
+}
+@media (min-width: 1280px) {
+	.main {
+	    padding-left: 280px;
+	}
+}
+@media (min-width: 600px) {
+	.css-12jf6st-MuiButtonBase-root-MuiListItem-root-MuiMenuItem-root {
+	    min-height: auto;
+	}
+}
+
+
+/*Profile page*/
+.profile_page {
+	background-image: url('/static/img/profile_background_1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+}
+.profile_header {
+    height: 90px;
+}
+.user_info {
+	display: flex;
+	width: 100%;
+    margin: 50px auto 0px;
+    padding: 0px 60px;
+    background: #f4f5f7;
+}
+.profile_page_image {
+	position: relative;
+	width: 200px;
+    height: 200px;
+    margin-top: -70px;
+    border-radius: 50%;
+    overflow: hidden;
+    user-select: none;
+    cursor: pointer;
+    border: 5px solid white;
+}
+.name_status {
+    padding: 35px 40px 15px;
+}
+.name_status p {
+    font-size: 16px;
+    color: #727370;
+    font-weight: 600;
+}
+.additional_info {
+	/*background: #fff;
+	margin-top: 25px;*/
+	/*background-image: url('/static/img/background-info.jpg');
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;*/
+}
+.additional_info_inner {
+	display: block;
+	padding: 35px 0px;
+	margin: 0 auto;
+	background: #353739b8;
+}
+.additional_info_inner table {
+	margin: 0 auto;
+}
+.additional_info_inner table tr th,.additional_info_inner table tr td {
+    padding: 5px 10px;
+    /*color: rgb(107, 119, 140);*/
+    color: rgb(255 255 255);
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.75;
+}
+.additional_info_inner  table tr th {
+	text-align: right;
+	font-weight: bold;
+}
+table.grades_table tr td {
+	color: rgb(33 37 41);
+}

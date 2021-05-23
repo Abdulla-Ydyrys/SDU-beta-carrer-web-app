@@ -4,48 +4,53 @@
 
 
 
-<h1>Edit Student | {{ student.student.username }}</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3>Edit Student | {{ student.student.username }}</h3>
+    <a href="/manage_student" class="btn btn-outline-primary">Back</a>
+</div>
   <form action="/update_student" method="post" enctype="multipart/form-data">
       {% csrf_token %}
     <div class="form-group">
-      <label >Email:</label>
-      <input type="email" class="form-control"  placeholder="Enter email" name="email" value="{{ student.student.email }}">
+      <label >Email</label>
+      <input type="email" class="form-control"  placeholder="Enter email" name="email" value="{{ student.student.email }}" disabled>
       <input type="hidden" class="form-control"  name="student_id" value="{{ student.student.id }}">
     </div>
      <div class="form-group">
-      <label >First Name:</label>
+      <label >First Name</label>
       <input type="text" class="form-control"  placeholder="Enter First Name" name="first_name" value="{{ student.student.first_name }}">
     </div>
     <div class="form-group">
-      <label >Last Name:</label>
+      <label >Last Name</label>
       <input type="text" class="form-control"  placeholder="Enter Last Name" name="last_name" value="{{ student.student.last_name }}">
     </div>
        <div class="form-group">
-      <label >Username:</label>
-      <input type="text" class="form-control"  placeholder="Enter Username" name="username" value="{{ student.student.username }}">
+      <label >Username</label>
+      <input type="text" class="form-control"  placeholder="Enter Username" name="username" value="{{ student.student.username }}" disabled>
     </div>
        <div class="form-group">
-      <label >Address:</label>
+      <label >Address</label>
       <input type="text" class="form-control"  placeholder="Enter Address" name="address" value="{{ student.address }}">
     </div>
 
        <div class="form-group">
-      <label >Gender:</label>
-      <select class="form-control" name="gender" value="{{ student.gender }}">
-     <option {% if student.gender == 'Male' %} selected {% endif %}>Male</option>
-           <option {% if student.gender == 'Female' %} selected {% endif %}>Female</option>
-
-  </select>
+           <label>Gender</label>
+           <div class="flex9 d-flex">
+            <div class="custom-control custom-radio mr-3">
+              <input type="radio" id="Male" name="gender" value="Male" class="custom-control-input" {% if student.gender == 'Male' %} checked {% endif %}>
+              <label class="custom-control-label" for="Male">Male</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="Female" value="Female" name="gender" class="custom-control-input" {% if student.gender == 'Female' %} checked {% endif %}>
+              <label class="custom-control-label" for="Female">Female</label>
+            </div>
+           </div>
     </div>
        <div class="form-group">
-    <label>Picture:</label>
-    <input type="file" class="form-control-file" name="picture" value="{{ student.picture }}">
+    <label>Picture</label>
+    <input type="file" class="form-control-file" name="picture" value="{{ student.picture }}" accept="image/jpeg,image/png,image/gif">
   </div>
 
-       <div class="form-group">
-        <button type="submit" class="btn btn-outline-primary">Submit</button>
-        <a href="/manage_student" class="btn btn-outline-danger">Сancel</a>
-       </div>
+        <button type="submit" class="btn btn-outline-primary d-flex ml-auto">Save</button>
 
        {% if messages %}
         {% for message in messages %}

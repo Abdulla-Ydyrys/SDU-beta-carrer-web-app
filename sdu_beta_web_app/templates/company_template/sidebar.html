@@ -1,12 +1,103 @@
 
-
+<!-- 
 <div class="col-2">
 <div class="list-group">
-  {% url 'company_profile' as company_profile %}
-  <a href="{{ company_profile }}" class="list-group-item list-group-item-action {% if request.path == company_profile %} active {% endif %}"><img src="{{ user.company.display_image }}" width="80" >{{ user.username }}</a>
+  {% url 'edit_company_profile' as edit_company_profile %}
+  <a href="{{ edit_company_profile }}" class="list-group-item list-group-item-action {% if request.path == edit_company_profile %} active {% endif %}"><img src="{{ user.company.display_image }}" width="80" >{{ user.username }}</a>
 
     {% url 'my_interns' as my_interns %}
   <a href="{{ my_interns }}" class="list-group-item list-group-item-action {% if request.path == my_interns %} active {% endif %}">MY interns</a>
 
 </div>
+  </div> -->
+
+
+
+  <div class="sitebar">
+<div class="list-group">
+  {% url 'company_profile' as company_profile %}
+  <div class="student_profile">
+    <div class="student_profile_inner">
+      <a href="{{ company_profile }}" class=" {% if request.path == company_profile %} active {% endif %}">
+        <div class="profile_image">
+          <img src="{{ user.company.display_image }}" width="80" >
+        </div>
+      </a>
+      <div class="profile_name">
+        <p>{% if user.company.in_whitelist == False %} <h6>{{ user.username }}</h6> <p>Status: Company</p> <span style="color:red">Pending &#9785;</span> {% else %}   <h6>{{ user.username }}
+        <svg style="width: 10px; height: 10px" fill="#5664d2c2" viewBox="0 -46 417.81333 417" xmlns="http://www.w3.org/2000/svg"><path d="m159.988281 318.582031c-3.988281 4.011719-9.429687 6.25-15.082031 6.25s-11.09375-2.238281-15.082031-6.25l-120.449219-120.46875c-12.5-12.5-12.5-32.769531 0-45.246093l15.082031-15.085938c12.503907-12.5 32.75-12.5 45.25 0l75.199219 75.203125 203.199219-203.203125c12.503906-12.5 32.769531-12.5 45.25 0l15.082031 15.085938c12.5 12.5 12.5 32.765624 0 45.246093zm0 0"/></svg>
+</h6><p>Status: Company {%endif%}</p>
+      </div>
+    </div>
   </div>
+  <hr class="divider">
+  <div class="sidebar_menu">
+    <ul class="list_root">
+      <li class="list_item">
+        {% url 'company_home' as company_home %}
+        <a href="{{ company_home }}" class="list-group-item list-group-item-action {% if request.path == company_home %} active {% endif %}">
+          <span class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon">
+            <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+            </svg>
+          </span>
+          Home
+        </a>
+      </li>
+      <li class="list_item">
+        {% url 'my_interns' as my_interns %}
+        <a href="{{ my_interns }}" class="list-group-item list-group-item-action {% if request.path == my_interns %} active {% endif %}">
+          <span class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon">
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             width="80.13px" height="80.13px" viewBox="0 0 80.13 80.13" style="enable-background:new 0 0 80.13 80.13;" xml:space="preserve" fill="currentColor">
+              <g>
+                  <path d="M48.355,17.922c3.705,2.323,6.303,6.254,6.776,10.817c1.511,0.706,3.188,1.112,4.966,1.112
+                      c6.491,0,11.752-5.261,11.752-11.751c0-6.491-5.261-11.752-11.752-11.752C53.668,6.35,48.453,11.517,48.355,17.922z M40.656,41.984
+                      c6.491,0,11.752-5.262,11.752-11.752s-5.262-11.751-11.752-11.751c-6.49,0-11.754,5.262-11.754,11.752S34.166,41.984,40.656,41.984
+                      z M45.641,42.785h-9.972c-8.297,0-15.047,6.751-15.047,15.048v12.195l0.031,0.191l0.84,0.263
+                      c7.918,2.474,14.797,3.299,20.459,3.299c11.059,0,17.469-3.153,17.864-3.354l0.785-0.397h0.084V57.833
+                      C60.688,49.536,53.938,42.785,45.641,42.785z M65.084,30.653h-9.895c-0.107,3.959-1.797,7.524-4.47,10.088
+                      c7.375,2.193,12.771,9.032,12.771,17.11v3.758c9.77-0.358,15.4-3.127,15.771-3.313l0.785-0.398h0.084V45.699
+                      C80.13,37.403,73.38,30.653,65.084,30.653z M20.035,29.853c2.299,0,4.438-0.671,6.25-1.814c0.576-3.757,2.59-7.04,5.467-9.276
+                      c0.012-0.22,0.033-0.438,0.033-0.66c0-6.491-5.262-11.752-11.75-11.752c-6.492,0-11.752,5.261-11.752,11.752
+                      C8.283,24.591,13.543,29.853,20.035,29.853z M30.589,40.741c-2.66-2.551-4.344-6.097-4.467-10.032
+                      c-0.367-0.027-0.73-0.056-1.104-0.056h-9.971C6.75,30.653,0,37.403,0,45.699v12.197l0.031,0.188l0.84,0.265
+                      c6.352,1.983,12.021,2.897,16.945,3.185v-3.683C17.818,49.773,23.212,42.936,30.589,40.741z"/>
+              </g>
+            </svg>
+          </span>
+          MY interns
+        </a>
+      </li>
+      <li class="list_item">
+        {% url 'vacancy_lists' as vacancy_lists %}
+        {% url 'add_company_vacancy' as add_company_vacancy %}
+        {% url 'edit_company_vacancy' vacancy_id=id as edit_company_vacancy %}
+        {% url 'view_respondent' vacancy_id=id as view_respondent %}
+        <a href="{{ vacancy_lists }}" class="list-group-item list-group-item-action {% if request.path == vacancy_lists %} active {% endif %} {% if request.path == add_company_vacancy %} active {% endif %} {% if request.path == edit_company_vacancy %} active {% endif %} {% if request.path == view_respondent %} active {% endif %}">
+          <span class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon">
+            <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="ReceiptIcon">
+              <path d="M18 17H6v-2h12v2zm0-4H6v-2h12v2zm0-4H6V7h12v2zM3 22l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2v20z"></path>
+            </svg>
+          </span>
+          Vacancy List
+        </a>
+      </li>
+      <li class="list_item">
+        {% url 'company_feedback' as company_feedback %}
+        <a href="{{ company_feedback }}" class="list-group-item list-group-item-action {% if request.path == company_feedback %} active {% endif %}">
+          <span class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon">
+            <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="ChatAltIcon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
+              </svg>
+            </svg>
+          </span>
+          Feedback
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+  </div>
+
